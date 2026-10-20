@@ -134,7 +134,8 @@
                 <!-- Card 1: Senior Spotlight Jack -->
                 <div onclick="openModal('jack')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
-                        <img src="jack-spotlight.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0f2fe/0369a1?text=Senior+Spotlight+Jack';" alt="Senior Spotlight Jack" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <!-- Using slice 1 as thumbnail -->
+                        <img src="static_student_jack_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0f2fe/0369a1?text=Senior+Spotlight+Jack';" alt="Senior Spotlight Jack" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                             Senior Spotlight Banner
@@ -177,7 +178,8 @@
                 <!-- Card 3: BeBo Buddies Gabriel Pod -->
                 <div onclick="openModal('buddies')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
-                        <img src="buddies-pod.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/fef3c7/92400e?text=BeBo+Buddies+Gabriel+Pod';" alt="BeBo Buddies Gabriel Pod" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <!-- Using slice 1 as thumbnail -->
+                        <img src="static_student_mentor_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/fef3c7/92400e?text=BeBo+Buddies+Gabriel+Pod';" alt="BeBo Buddies Gabriel Pod" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                             Peer Support Story
@@ -220,7 +222,8 @@
                 <!-- Card 5: Happy Holidays (Video) -->
                 <div onclick="openModal('holidayBebo')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
-                        <img src="holiday-image.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0e7ff/3730a3?text=▶+Happy+Holidays';" alt="Happy Holidays Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <!-- Using slice 1 as thumbnail -->
+                        <img src="static_holiday_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0e7ff/3730a3?text=▶+Happy+Holidays';" alt="Happy Holidays Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="w-16 h-16 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center shadow-xl group-hover:scale-110 transition">
@@ -268,7 +271,8 @@
                 <!-- Card 7: Inaugural Sophomore Celebration -->
                 <div onclick="openModal('sophomore')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
-                        <img src="sophomore-celebration.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/d1fae5/065f46?text=Sophomore+Celebration';" alt="Inaugural Sophomore Celebration" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <!-- Using slice 1 as thumbnail -->
+                        <img src="static_event_sophomore_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/d1fae5/065f46?text=Sophomore+Celebration';" alt="Inaugural Sophomore Celebration" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                             Milestone Event
@@ -361,9 +365,12 @@
                 type: "Senior Spotlight Banner Series",
                 isVideo: false,
                 images: [
-                    "jack-spotlight.png"
+                    "static_student_jack_1.png",
+                    "static_student_jack_2.png",
+                    "static_student_jack_3.png",
+                    "static_student_jack_4.png",
+                    "static_student_jack_5.png"
                 ],
-                collageUrl: "jack-spotlight.png",
                 goal: "Highlight individual student journeys, celebrate senior achievements, and explain how BeBo enables interdisciplinary focus.",
                 approach: "Structured a full-width story banner combining photo highlights, student quotes, and key milestone callouts.",
                 caption: "Meet Jack! 🎓 His big question: '...How data and strategy can be used to create smarter decision-making in sports organizations [e.g.] player valuation and team building?' Started: Broad interest ➔ Evolved: Analytics & agency focus. Favorite BeBo memory: Presenting and discussing experiences at the BeBo senior reunion! 🐻✨",
@@ -374,9 +381,12 @@
                 type: "Peer Support Mentorship Banner",
                 isVideo: false,
                 images: [
-                    "buddies-pod.png"
+                    "static_student_mentor_1.png",
+                    "static_student_mentor_2.png",
+                    "static_student_mentor_3.png",
+                    "static_student_mentor_4.png",
+                    "static_student_mentor_5.png"
                 ],
-                collageUrl: "buddies-pod.png",
                 goal: "Promote cross-cohort connection and showcase how first-year students benefit from second-year peer mentorship.",
                 approach: "Created a warm, illustrated polaroid-style layout featuring real quote excerpts and outings across St. Louis.",
                 caption: "Being a first-year is easier with friends! 🐻💙 'In BeBo Buddies, students are paired with like-minded peers who also have different interests.' Gabriel and his buddies exploring South Grand, thrift stores, and casual chats between classes. 'BeBo Buddies makes a big campus feel like home.' 🌿",
@@ -397,9 +407,11 @@
                 type: "Milestone Reflection Event Banner",
                 isVideo: false,
                 images: [
-                    "sophomore-celebration.png"
+                    "static_event_sophomore_1.png",
+                    "static_event_sophomore_2.png",
+                    "static_event_sophomore_3.png",
+                    "static_event_sophomore_4.png"
                 ],
-                collageUrl: "sophomore-celebration.png",
                 goal: "Commemorate sophomore cohort progress and celebrate being halfway through the program.",
                 approach: "Mapped a visual timeline from Fall 2024 Orientation to Fall 2024 Welcome Dinner, leading into 'Spring 2026, here we are!'",
                 caption: "BeBo Inaugural Sophomore Celebration! 🎉 Our sophomores spent time reflecting on just how much they've grown since their first year and discussing what they're most excited about moving into the second half of our program. 🚀 @WashUBeyondBoundaries",
@@ -442,7 +454,6 @@
                 images: [
                     "https://placehold.co/600x800/d1fae5/065f46?text=In+5+words,+your+BeBo+experience+has+been..."
                 ],
-                collageUrl: "https://placehold.co/1200x400/d1fae5/065f46?text=In+5+words,+your+BeBo+experience+has+been...",
                 goal: "Drive interactive replies and qualitative student feedback on Instagram stories.",
                 approach: "Designed a minimalist floral aesthetic framing a simple, punchy prompt question.",
                 caption: "In 5 words, your BeBo experience has been... Drop your responses below! 👇🌿 #WashU #BeyondBoundaries",
@@ -484,6 +495,7 @@
                 mediaElement = `
                     <div class="space-y-4">
                         <div class="relative rounded-2xl overflow-hidden bg-slate-100 h-[420px] flex items-center justify-center shadow-lg border border-pink-100 group">
+                            <!-- Using object-contain so your vertical slices fit perfectly without being cropped -->
                             <img id="carouselImg" src="${activeImagesList[0]}" onerror="this.onerror=null; this.src='https://placehold.co/600x800/f1f5f9/475569?text=Image+Preview';" alt="${item.title}" class="w-full h-full object-contain transition duration-300">
                             
                             ${hasMultiple ? `
@@ -498,21 +510,6 @@
                                 </div>
                             ` : ''}
                         </div>
-
-                        ${item.collageUrl ? `
-                            <div class="bg-pink-50/60 border border-pink-200/80 rounded-2xl p-3 text-center">
-                                <div class="flex items-center justify-between mb-1.5 px-1">
-                                    <span class="text-[11px] font-bold uppercase tracking-wider text-pink-700">Full Resolution Banner</span>
-                                    <span class="text-[10px] text-slate-500 font-medium">Click to expand full size 🔍</span>
-                                </div>
-                                <div onclick="openZoomModal('${item.collageUrl}')" class="relative group cursor-pointer overflow-hidden rounded-xl border border-pink-200 bg-white">
-                                    <img src="${item.collageUrl}" onerror="this.onerror=null; this.src='https://placehold.co/1200x400/e2e8f0/334155?text=Full+Resolution+Banner';" alt="Full View Banner" class="w-full h-24 object-cover group-hover:scale-105 transition duration-300">
-                                    <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold text-xs gap-1 backdrop-blur-[1px]">
-                                        <span>🔍 View Full Banner</span>
-                                    </div>
-                                </div>
-                            </div>
-                        ` : ''}
                     </div>
                 `;
             }
@@ -574,20 +571,6 @@
             if (counter) counter.innerText = `${currentImageIndex + 1} / ${activeImagesList.length}`;
         }
 
-        function openZoomModal(url) {
-            const zoomModal = document.getElementById('zoomModal');
-            const zoomedImg = document.getElementById('zoomedImage');
-            zoomedImg.src = url;
-            zoomModal.classList.remove('hidden');
-            setTimeout(() => zoomModal.classList.remove('opacity-0'), 10);
-        }
-
-        function closeZoomModal() {
-            const zoomModal = document.getElementById('zoomModal');
-            zoomModal.classList.add('opacity-0');
-            setTimeout(() => zoomModal.classList.add('hidden'), 300);
-        }
-
         function closeModal() {
             const modal = document.getElementById('itemModal');
             const box = document.getElementById('modalContentBox');
@@ -602,9 +585,7 @@
 
         window.onclick = function(event) {
             const modal = document.getElementById('itemModal');
-            const zoomModal = document.getElementById('zoomModal');
             if (event.target === modal) closeModal();
-            if (event.target === zoomModal) closeZoomModal();
         }
     </script>
 </body>
