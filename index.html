@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator & Creative Strategist Portfolio</title>
+    <title>Catherine Chung | Creative Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -81,6 +81,19 @@
                 flex: 0 0 360px;
             }
         }
+
+        /* Custom scrollbar for panoramic view */
+        .panorama-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .panorama-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 9999px;
+        }
+        .panorama-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
@@ -88,30 +101,58 @@
     <div class="ambient-bg-1"></div>
     <div class="ambient-bg-2"></div>
 
-    <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center border-b border-pink-200/60 backdrop-blur-md">
+    <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center border-b border-pink-200/60 backdrop-blur-md sticky top-0 z-40 bg-white/40">
         <div class="flex items-center space-x-4 mb-4 sm:mb-0">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center font-extrabold text-2xl text-white shadow-lg shadow-pink-500/30">
-                P
+                C
             </div>
             <div>
-                <h1 class="font-extrabold text-2xl text-slate-900 tracking-tight">[Your First & Last Name]</h1>
+                <h1 class="font-extrabold text-2xl text-slate-900 tracking-tight">Catherine Chung</h1>
                 <p class="text-xs font-semibold text-pink-600 uppercase tracking-wider mt-0.5">Content Creator & Creative Strategist</p>
             </div>
         </div>
+        <nav class="flex space-x-6 text-sm font-bold text-slate-600">
+            <a href="#about" class="hover:text-pink-600 transition">About Me</a>
+            <a href="#portfolio" class="hover:text-pink-600 transition">Portfolio</a>
+        </nav>
     </header>
 
-    <main class="w-full max-w-7xl mx-auto px-6 py-10 flex-grow space-y-16">
+    <main class="w-full max-w-7xl mx-auto px-6 py-10 flex-grow space-y-24">
         
-        <div class="text-center max-w-3xl mx-auto mb-4">
-            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-slate-900">
-                Creative Work & <span class="bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">Campaign Portfolio</span>
-            </h2>
-            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
-                A collection of creative campaigns, multi-media assets, short-form video reels, and audience engagement strategies. Explore work samples detailing campaign goals, strategic thinking, caption copy, and measurable impact.
-            </p>
-        </div>
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="scroll-mt-24">
+            <div class="bg-white/80 border border-pink-200/80 rounded-3xl p-8 sm:p-12 shadow-xl backdrop-blur-md max-w-4xl mx-auto">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-6 text-slate-900 flex items-center gap-3">
+                    <span class="w-4 h-4 rounded-full bg-pink-500"></span> About Me
+                </h2>
+                <div class="prose prose-lg text-slate-700 leading-relaxed space-y-4 font-medium">
+                    <p>
+                        Hi, I'm <strong class="text-slate-900">Catherine</strong>! 🌻 I'm a creative soul originally from Houston, TX, and I just graduated from Washington University in St. Louis (May 2026) with a BA in Arts.
+                    </p>
+                    <p>
+                        I'm endlessly curious and always on the lookout for my next adventure. Whether it's exploring a new city, studying a fascinating subject, or diving into a good book, I thrive on discovery. I absolutely love learning about and understanding different cultures—and the best way to do that is through food! Trying out diverse cuisines and exploring new restaurants is one of my absolute favorite pastimes.
+                    </p>
+                    <p>
+                        At my core, I am an artist, designer, and writer. I am deeply passionate about creating art and designs that foster community and serve as a platform for people to express their emotions. For me, creativity is about making people feel seen and understood.
+                    </p>
+                    <p class="italic text-pink-600 border-l-4 border-pink-300 pl-4 py-1 my-6 bg-pink-50/50 rounded-r-lg">
+                        "I can't wait to connect, collaborate, and work with others who challenge me and inspire me to grow. Let's create something beautiful together!"
+                    </p>
+                </div>
+            </div>
+        </section>
 
-        <section>
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="scroll-mt-24">
+            <div class="text-center max-w-3xl mx-auto mb-4">
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-slate-900">
+                    Creative Work & <span class="bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">Campaign Portfolio</span>
+                </h2>
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+                    A collection of creative campaigns, multi-media assets, short-form video reels, and audience engagement strategies. Explore work samples detailing campaign goals, strategic thinking, caption copy, and measurable impact.
+                </p>
+            </div>
+
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 border-b border-pink-200/60 pb-3">
                 <div>
                     <h3 class="text-2xl font-extrabold text-slate-900 flex items-center gap-2">
@@ -153,7 +194,6 @@
                 <!-- Card 2: Video Reel - Entrepreneurship -->
                 <div onclick="openModal('entrepreneurship')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
-                        <!-- Updated Thumbnail -->
                         <img src="Thumbnail Entrepreneurship.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/c7d2fe/312e81?text=▶+Play+Course+Reel';" alt="Entrepreneurship Reel" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -197,7 +237,6 @@
                 <!-- Card 4: Video Reel - Architecture Contest -->
                 <div onclick="openModal('architecture')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
-                        <!-- Updated Thumbnail -->
                         <img src="Architecture thumbnail.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/dbeafe/1e40af?text=▶+Architecture+Contest';" alt="Architecture Contest" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -246,7 +285,6 @@
                 <!-- Card 6: Video Reel - Clare Dutton '25 -->
                 <div onclick="openModal('clare')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
-                        <!-- Updated Thumbnail -->
                         <img src="Clare Dutton thumbnail.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/fbcfe8/831843?text=▶+Clare+Dutton+%2725';" alt="Clare Dutton Spotlight Reel" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -313,6 +351,7 @@
         </div>
     </main>
 
+    <!-- MODAL FOR VIEWING ITEMS -->
     <div id="itemModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden opacity-0 transition-opacity duration-300 px-4 py-6">
         <div class="bg-white border border-pink-200 rounded-3xl max-w-5xl w-full p-6 sm:p-8 relative transform scale-95 transition-transform duration-300 max-h-[92vh] overflow-y-auto shadow-2xl" id="modalContentBox">
             <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 w-10 h-10 rounded-full flex items-center justify-center font-bold text-base transition z-20">
@@ -324,6 +363,7 @@
         </div>
     </div>
 
+    <!-- ZOOM MODAL -->
     <div id="zoomModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300 p-4">
         <div class="relative max-w-6xl w-full flex flex-col items-center">
             <button onclick="closeZoomModal()" class="absolute -top-12 right-0 text-white bg-white/20 hover:bg-white/40 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition">
@@ -335,7 +375,7 @@
     </div>
 
     <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-pink-200/60 text-center text-xs text-slate-500 font-medium">
-        <p>© Portfolio Website. Built for recruiters and creative strategy portfolios.</p>
+        <p>© 2026 Catherine Chung. Built for recruiters and creative strategy portfolios.</p>
     </footer>
 
     <script>
@@ -460,13 +500,18 @@
                 activeImagesList = item.images || [];
                 const hasMultiple = activeImagesList.length > 1;
 
-                // Generates the full thumbnail strip for all slices
+                // 1. Generates the thumbnail strip for individual slices (Clickable)
                 const thumbnailStrip = activeImagesList.map((imgSrc, index) => `
                     <img src="${imgSrc}" onclick="openZoomModal('${imgSrc}')" class="h-16 w-auto object-cover cursor-zoom-in rounded-md border-2 border-transparent hover:border-pink-500 transition shadow-sm" alt="Slice ${index + 1}">
                 `).join('');
 
+                // 2. Generates the seamless panoramic view (stitched horizontally)
+                const panoramicStrip = activeImagesList.map(imgSrc => `
+                    <img src="${imgSrc}" onclick="openZoomModal('${imgSrc}')" class="h-48 w-auto object-cover block cursor-zoom-in hover:opacity-90 transition" alt="Panorama Slice">
+                `).join('');
+
                 mediaElement = `
-                    <div class="space-y-4">
+                    <div class="space-y-6">
                         <!-- Main Image Displayer (Clickable to Zoom) -->
                         <div class="relative rounded-2xl overflow-hidden bg-slate-100 h-[420px] flex items-center justify-center shadow-lg border border-pink-100 group">
                             <img id="carouselImg" src="${activeImagesList[0]}" onclick="openZoomModal('${activeImagesList[0]}')" onerror="this.onerror=null; this.src='https://placehold.co/600x800/f1f5f9/475569?text=Image+Preview';" alt="${item.title}" class="w-full h-full object-contain transition duration-300 cursor-zoom-in">
@@ -484,16 +529,32 @@
                             ` : ''}
                         </div>
 
-                        <!-- Full Length Thumbnail Strip -->
+                        <!-- Individual Slices Strip (Click to Expand) -->
+                        ${hasMultiple ? `
                         <div class="bg-pink-50/60 border border-pink-200/80 rounded-2xl p-3 text-center">
                             <div class="flex items-center justify-between mb-2 px-1">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-pink-700">All Slices (Click to Expand)</span>
-                                <span class="text-[10px] text-slate-500 font-medium">Click image to zoom 🔍</span>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-pink-700">Slices (Click to Expand)</span>
                             </div>
                             <div class="flex gap-2 overflow-x-auto pb-2 justify-center">
                                 ${thumbnailStrip}
                             </div>
                         </div>
+                        ` : ''}
+
+                        <!-- Full Length Panoramic View -->
+                        ${hasMultiple ? `
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3">
+                            <div class="flex items-center justify-between mb-2 px-1">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700">Panoramic Full View</span>
+                                <span class="text-[10px] text-slate-500 font-medium">Scroll horizontally to explore ➔</span>
+                            </div>
+                            <div class="overflow-x-auto w-full pb-2 panorama-scroll rounded-lg">
+                                <div class="flex" style="width: max-content;">
+                                    ${panoramicStrip}
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
                     </div>
                 `;
             }
@@ -553,7 +614,6 @@
             
             if (img) {
                 img.src = activeImagesList[currentImageIndex];
-                // Update the zoom click event to the new image
                 img.setAttribute('onclick', `openZoomModal('${activeImagesList[currentImageIndex]}')`);
             }
             if (counter) counter.innerText = `${currentImageIndex + 1} / ${activeImagesList.length}`;
