@@ -110,9 +110,9 @@
     <div class="ambient-bg-1"></div>
     <div class="ambient-bg-2"></div>
 
-    <!-- HEADER -->
-    <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center border-b border-pink-200/60 backdrop-blur-md sticky top-0 z-40 bg-white/40">
-        <div class="flex items-center space-x-4 mb-4 sm:mb-0 cursor-pointer" onclick="showView('portfolio')">
+    <!-- COMPLETELY STATIC & TRANSPARENT HEADER -->
+    <header class="w-full max-w-7xl mx-auto px-6 pt-12 pb-6 flex flex-col sm:flex-row justify-between items-center">
+        <div class="flex items-center space-x-4 mb-4 sm:mb-0">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center font-extrabold text-2xl text-white shadow-lg shadow-pink-500/30">
                 C
             </div>
@@ -121,16 +121,20 @@
                 <p class="text-xs font-semibold text-pink-600 uppercase tracking-wider mt-0.5">Content Creator & Creative Strategist</p>
             </div>
         </div>
-        
-        <!-- Navigation Tabs -->
-        <nav class="flex space-x-6 text-sm font-bold">
-            <button onclick="showView('portfolio')" id="nav-portfolio" class="text-pink-600 border-b-2 border-pink-600 pb-1 transition-all">Portfolio</button>
-            <button onclick="showView('about')" id="nav-about" class="text-slate-500 hover:text-pink-600 pb-1 transition-all">About Me</button>
-        </nav>
     </header>
 
-    <main class="w-full max-w-7xl mx-auto px-6 py-10 flex-grow relative">
+    <main class="w-full max-w-7xl mx-auto px-6 py-6 flex-grow relative">
         
+        <!-- NAVIGATION TABS (Below Header) -->
+        <div class="flex justify-center mb-12 gap-4">
+            <button onclick="showView('portfolio')" id="nav-portfolio" class="px-8 py-3 rounded-full font-bold transition bg-pink-500 text-white shadow-lg shadow-pink-500/30">
+                Portfolio
+            </button>
+            <button onclick="showView('about')" id="nav-about" class="px-8 py-3 rounded-full font-bold transition bg-white text-slate-600 hover:bg-pink-50 shadow-sm border border-pink-200">
+                About Me
+            </button>
+        </div>
+
         <!-- PORTFOLIO VIEW -->
         <div id="view-portfolio" class="view-section space-y-16">
             <div class="text-center max-w-3xl mx-auto mb-4">
@@ -348,19 +352,19 @@
                     <span class="w-4 h-4 rounded-full bg-pink-500"></span> About Me
                 </h2>
                 <div class="prose prose-lg text-slate-700 leading-relaxed space-y-6 font-medium">
-                    <p class="text-xl text-slate-800 font-semibold">
+                    <p class="text-2xl text-slate-800 font-semibold">
                         Hey there! I’m Catherine. 🌻
                     </p>
                     <p>
-                        I’m a Houston native and a recent grad from Washington University in St. Louis (Class of 2026) with a BA in Arts. I’m a naturally curious person who’s always chasing the next adventure—whether that's wandering through a new city, getting lost in a good book, or learning everything I can about a new subject. 
+                        I’m a Houston native and a recent grad from Washington University in St. Louis (Class of 2026) with a BA in Arts. I’m naturally curious and always chasing the next adventure—whether that's wandering through a new city, studying a fascinating subject, or getting lost in a good book. 
                     </p>
                     <p>
-                        I’m a huge foodie and absolutely love exploring different cultures through their cuisines! 
+                        I’m a huge foodie and I absolutely love exploring different cultures through their cuisines! Learning about the world through food and shared experiences is one of my favorite things.
                     </p>
                     <p>
-                        At my core, I’m an artist, designer, and writer. I pour my heart into creating designs and art that build community and give people a way to express their emotions. For me, creativity is all about making people feel seen and understood. 
+                        At my core, I’m an artist, designer, and writer. I pour my heart into creating designs and art that build community and give people a way to express their emotions. For me, creativity is all about making people feel seen and understood.
                     </p>
-                    <div class="mt-8 p-6 bg-pink-50 rounded-2xl border border-pink-100 italic text-pink-700 text-center">
+                    <div class="mt-8 p-6 bg-pink-50 rounded-2xl border border-pink-100 italic text-pink-700 text-center text-lg">
                         "I can't wait to connect and collaborate with others who challenge and inspire me. Let's create something beautiful together!"
                     </div>
                 </div>
@@ -409,19 +413,21 @@
                 aboutView.classList.add('hidden');
                 
                 // Update Nav Styles
-                navPortfolio.classList.add('text-pink-600', 'border-b-2', 'border-pink-600');
-                navPortfolio.classList.remove('text-slate-500');
-                navAbout.classList.remove('text-pink-600', 'border-b-2', 'border-pink-600');
-                navAbout.classList.add('text-slate-500');
+                navPortfolio.classList.add('bg-pink-500', 'text-white', 'shadow-lg', 'shadow-pink-500/30');
+                navPortfolio.classList.remove('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
+                
+                navAbout.classList.remove('bg-pink-500', 'text-white', 'shadow-lg', 'shadow-pink-500/30');
+                navAbout.classList.add('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
             } else {
                 portfolioView.classList.add('hidden');
                 aboutView.classList.remove('hidden');
                 
                 // Update Nav Styles
-                navAbout.classList.add('text-pink-600', 'border-b-2', 'border-pink-600');
-                navAbout.classList.remove('text-slate-500');
-                navPortfolio.classList.remove('text-pink-600', 'border-b-2', 'border-pink-600');
-                navPortfolio.classList.add('text-slate-500');
+                navAbout.classList.add('bg-pink-500', 'text-white', 'shadow-lg', 'shadow-pink-500/30');
+                navAbout.classList.remove('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
+                
+                navPortfolio.classList.remove('bg-pink-500', 'text-white', 'shadow-lg', 'shadow-pink-500/30');
+                navPortfolio.classList.add('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
             }
             
             // Scroll to top smoothly
