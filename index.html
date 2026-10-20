@@ -103,6 +103,15 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Hide scrollbar for panoramic zoom */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
@@ -110,8 +119,8 @@
     <div class="ambient-bg-1"></div>
     <div class="ambient-bg-2"></div>
 
-    <!-- COMPLETELY STATIC & TRANSPARENT HEADER -->
-    <header class="w-full max-w-7xl mx-auto px-6 pt-12 pb-6 flex flex-col sm:flex-row justify-between items-center">
+    <!-- COMPLETELY STATIC & TRANSPARENT HEADER (No sticky, no fixed) -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
         <div class="flex items-center space-x-4 mb-4 sm:mb-0">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center font-extrabold text-2xl text-white shadow-lg shadow-pink-500/30">
                 C
@@ -125,7 +134,7 @@
 
     <main class="w-full max-w-7xl mx-auto px-6 py-6 flex-grow relative">
         
-        <!-- NAVIGATION TABS (Below Header) -->
+        <!-- NAVIGATION TABS (Static) -->
         <div class="flex justify-center mb-12 gap-4">
             <button onclick="showView('portfolio')" id="nav-portfolio" class="px-8 py-3 rounded-full font-bold transition bg-pink-500 text-white shadow-lg shadow-pink-500/30">
                 Portfolio
@@ -385,7 +394,7 @@
         </div>
     </div>
 
-    <!-- ZOOM MODAL -->
+    <!-- ZOOM MODAL (Individual Slices) -->
     <div id="zoomModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300 p-4">
         <div class="relative max-w-6xl w-full flex flex-col items-center">
             <button onclick="closeZoomModal()" class="absolute -top-12 right-0 text-white bg-white/20 hover:bg-white/40 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition">
@@ -394,6 +403,22 @@
             <img id="zoomedImage" src="" alt="Zoomed View" class="max-h-[85vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/20">
             <p class="text-white/80 text-xs mt-3 font-medium">🔍 Click anywhere outside to exit full banner view</p>
         </div>
+    </div>
+
+    <!-- PANORAMIC ZOOM MODAL -->
+    <div id="panoramaZoomModal" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300 p-4">
+        <div class="absolute top-4 right-4 flex gap-4 z-50">
+            <button onclick="zoomPanorama(-0.25)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">-</button>
+            <button onclick="zoomPanorama(0.25)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">+</button>
+            <button onclick="closePanoramaZoom()" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl transition shadow-lg">✕</button>
+        </div>
+        
+        <div class="w-full h-full overflow-auto flex items-center p-12 no-scrollbar" id="panoramaZoomContainer">
+            <div class="flex transition-transform duration-200 origin-left" id="panoramaZoomContent" style="transform: scale(1);">
+                <!-- Images injected here -->
+            </div>
+        </div>
+        <p class="text-white/80 text-sm mt-3 font-medium absolute bottom-6 bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-sm pointer-events-none">Scroll horizontally to explore. Use +/- to zoom.</p>
     </div>
 
     <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-pink-200/60 text-center text-xs text-slate-500 font-medium">
@@ -412,7 +437,6 @@
                 portfolioView.classList.remove('hidden');
                 aboutView.classList.add('hidden');
                 
-                // Update Nav Styles
                 navPortfolio.classList.add('bg-pink-500', 'text-white', 'shadow-lg', 'shadow-pink-500/30');
                 navPortfolio.classList.remove('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
                 
@@ -422,7 +446,6 @@
                 portfolioView.classList.add('hidden');
                 aboutView.classList.remove('hidden');
                 
-                // Update Nav Styles
                 navAbout.classList.add('bg-pink-500', 'text-white', 'shadow-lg', 'shadow-pink-500/30');
                 navAbout.classList.remove('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
                 
@@ -430,7 +453,6 @@
                 navPortfolio.classList.add('bg-white', 'text-slate-600', 'hover:bg-pink-50', 'shadow-sm', 'border', 'border-pink-200');
             }
             
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -527,6 +549,7 @@
 
         let currentImageIndex = 0;
         let activeImagesList = [];
+        let panoramaZoomScale = 1;
 
         function scrollGallery(gridId, distance) {
             const container = document.getElementById(gridId);
@@ -556,14 +579,9 @@
                 activeImagesList = item.images || [];
                 const hasMultiple = activeImagesList.length > 1;
 
-                // 1. Generates the thumbnail strip for individual slices (Clickable)
-                const thumbnailStrip = activeImagesList.map((imgSrc, index) => `
-                    <img src="${imgSrc}" onclick="openZoomModal('${imgSrc}')" class="h-16 w-auto object-cover cursor-zoom-in rounded-md border-2 border-transparent hover:border-pink-500 transition shadow-sm" alt="Slice ${index + 1}">
-                `).join('');
-
-                // 2. Generates the seamless panoramic view (stitched horizontally)
+                // Generates the seamless panoramic view (stitched horizontally)
                 const panoramicStrip = activeImagesList.map(imgSrc => `
-                    <img src="${imgSrc}" onclick="openZoomModal('${imgSrc}')" class="h-48 w-auto object-cover block cursor-zoom-in hover:opacity-90 transition" alt="Panorama Slice">
+                    <img src="${imgSrc}" class="h-48 w-auto object-cover block" alt="Panorama Slice">
                 `).join('');
 
                 mediaElement = `
@@ -585,26 +603,15 @@
                             ` : ''}
                         </div>
 
-                        <!-- Individual Slices Strip (Click to Expand) -->
-                        ${hasMultiple ? `
-                        <div class="bg-pink-50/60 border border-pink-200/80 rounded-2xl p-3 text-center">
-                            <div class="flex items-center justify-between mb-2 px-1">
-                                <span class="text-[11px] font-bold uppercase tracking-wider text-pink-700">Slices (Click to Expand)</span>
-                            </div>
-                            <div class="flex gap-2 overflow-x-auto pb-2 justify-center">
-                                ${thumbnailStrip}
-                            </div>
-                        </div>
-                        ` : ''}
-
                         <!-- Full Length Panoramic View -->
                         ${hasMultiple ? `
                         <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3">
                             <div class="flex items-center justify-between mb-2 px-1">
                                 <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700">Panoramic Full View</span>
-                                <span class="text-[10px] text-slate-500 font-medium">Scroll horizontally to explore ➔</span>
+                                <span class="text-[10px] text-slate-500 font-medium cursor-pointer hover:text-pink-600 transition" onclick="openPanoramaZoom()">Click to expand & zoom 🔍</span>
                             </div>
-                            <div class="overflow-x-auto w-full pb-2 panorama-scroll rounded-lg">
+                            <!-- Clickable strip to open Panorama Zoom Modal -->
+                            <div onclick="openPanoramaZoom()" class="overflow-x-auto w-full pb-2 panorama-scroll rounded-lg cursor-pointer group">
                                 <div class="flex" style="width: max-content;">
                                     ${panoramicStrip}
                                 </div>
@@ -675,6 +682,7 @@
             if (counter) counter.innerText = `${currentImageIndex + 1} / ${activeImagesList.length}`;
         }
 
+        // --- SINGLE IMAGE ZOOM ---
         function openZoomModal(url) {
             const zoomModal = document.getElementById('zoomModal');
             const zoomedImg = document.getElementById('zoomedImage');
@@ -687,6 +695,37 @@
             const zoomModal = document.getElementById('zoomModal');
             zoomModal.classList.add('opacity-0');
             setTimeout(() => zoomModal.classList.add('hidden'), 300);
+        }
+
+        // --- PANORAMIC ZOOM (NEW) ---
+        function openPanoramaZoom() {
+            const container = document.getElementById('panoramaZoomContent');
+            container.innerHTML = activeImagesList.map(imgSrc => `
+                <img src="${imgSrc}" class="h-[70vh] w-auto object-contain block" alt="Panorama">
+            `).join('');
+            
+            panoramaZoomScale = 1;
+            container.style.transform = `scale(${panoramaZoomScale})`;
+            
+            const modal = document.getElementById('panoramaZoomModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            
+            // Reset scroll position
+            document.getElementById('panoramaZoomContainer').scrollLeft = 0;
+        }
+
+        function closePanoramaZoom() {
+            const modal = document.getElementById('panoramaZoomModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        function zoomPanorama(amount) {
+            panoramaZoomScale += amount;
+            if (panoramaZoomScale < 0.5) panoramaZoomScale = 0.5;
+            if (panoramaZoomScale > 3) panoramaZoomScale = 3;
+            document.getElementById('panoramaZoomContent').style.transform = `scale(${panoramaZoomScale})`;
         }
 
         function closeModal() {
@@ -704,8 +743,11 @@
         window.onclick = function(event) {
             const modal = document.getElementById('itemModal');
             const zoomModal = document.getElementById('zoomModal');
+            const panoModal = document.getElementById('panoramaZoomModal');
+            
             if (event.target === modal) closeModal();
             if (event.target === zoomModal) closeZoomModal();
+            if (event.target === panoModal) closePanoramaZoom();
         }
     </script>
 </body>
