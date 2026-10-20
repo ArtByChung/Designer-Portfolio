@@ -11,12 +11,10 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: #0f172a;
             overflow-x: hidden;
-            /* Soft mixed background blend: purple, pink, orange */
             background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 35%, #fef3c7 70%, #ffedd5 100%);
             background-attachment: fixed;
         }
 
-        /* Ambient floating blurred dynamic background shapes */
         .ambient-bg-1 {
             position: fixed;
             top: -10%;
@@ -43,7 +41,6 @@
             pointer-events: none;
         }
 
-        /* Custom horizontal scrolling gallery container */
         .horizontal-gallery {
             display: flex;
             gap: 2rem;
@@ -54,7 +51,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Custom sleek scrollbars */
         .horizontal-gallery::-webkit-scrollbar {
             height: 8px;
         }
@@ -74,7 +70,6 @@
             transform-origin: center;
         }
 
-        /* Pure card hover lift without blurring adjacent items */
         .gallery-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 20px 35px -10px rgba(236, 72, 153, 0.25), 0 0 20px rgba(249, 115, 22, 0.15);
@@ -134,13 +129,12 @@
                 </div>
             </div>
 
-            <!-- UNIFIED HORIZONTAL GALLERY: PHOTOS AND VIDEOS TOGETHER -->
             <div class="horizontal-gallery w-full" id="beboGrid">
                 
                 <!-- Card 1: Senior Spotlight Jack -->
                 <div onclick="openModal('jack')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
-                        <img src="SP26 BeBo26 Senior Spotlight Jack.jpg" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0f2fe/0369a1?text=Senior+Spotlight+Jack';" alt="Senior Spotlight Jack" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="SP26 BeBo26 Senior Spotlight Jack.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0f2fe/0369a1?text=Senior+Spotlight+Jack';" alt="Senior Spotlight Jack" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                             Senior Spotlight Banner
@@ -183,7 +177,7 @@
                 <!-- Card 3: BeBo Buddies Gabriel Pod -->
                 <div onclick="openModal('buddies')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
-                        <img src="SP26 BeBo Buddies Gabriel Pod.jpg" onerror="this.onerror=null; this.src='https://placehold.co/600x800/fef3c7/92400e?text=BeBo+Buddies+Gabriel+Pod';" alt="BeBo Buddies Gabriel Pod" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="SP26 BeBo Buddies Gabriel Pod.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/fef3c7/92400e?text=BeBo+Buddies+Gabriel+Pod';" alt="BeBo Buddies Gabriel Pod" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                             Peer Support Story
@@ -223,7 +217,7 @@
                     </div>
                 </div>
 
-                <!-- Card 5: Happy Holidays (Now a Video based on your screenshot) -->
+                <!-- Card 5: Happy Holidays (Video) -->
                 <div onclick="openModal('holidayBebo')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
                         <img src="https://placehold.co/600x800/e0e7ff/3730a3?text=▶+Happy+Holidays" alt="Happy Holidays Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -274,7 +268,7 @@
                 <!-- Card 7: Inaugural Sophomore Celebration -->
                 <div onclick="openModal('sophomore')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                     <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
-                        <img src="46.jpg" onerror="this.onerror=null; this.src='https://placehold.co/600x800/d1fae5/065f46?text=Sophomore+Celebration';" alt="Inaugural Sophomore Celebration" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="46.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/d1fae5/065f46?text=Sophomore+Celebration';" alt="Inaugural Sophomore Celebration" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                         <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                             Milestone Event
@@ -367,9 +361,9 @@
                 type: "Senior Spotlight Banner Series",
                 isVideo: false,
                 images: [
-                    "SP26 BeBo26 Senior Spotlight Jack.jpg"
+                    "SP26 BeBo26 Senior Spotlight Jack.png"
                 ],
-                collageUrl: "SP26 BeBo26 Senior Spotlight Jack.jpg",
+                collageUrl: "SP26 BeBo26 Senior Spotlight Jack.png",
                 goal: "Highlight individual student journeys, celebrate senior achievements, and explain how BeBo enables interdisciplinary focus.",
                 approach: "Structured a full-width story banner combining photo highlights, student quotes, and key milestone callouts.",
                 caption: "Meet Jack! 🎓 His big question: '...How data and strategy can be used to create smarter decision-making in sports organizations [e.g.] player valuation and team building?' Started: Broad interest ➔ Evolved: Analytics & agency focus. Favorite BeBo memory: Presenting and discussing experiences at the BeBo senior reunion! 🐻✨",
@@ -380,9 +374,9 @@
                 type: "Peer Support Mentorship Banner",
                 isVideo: false,
                 images: [
-                    "SP26 BeBo Buddies Gabriel Pod.jpg"
+                    "SP26 BeBo Buddies Gabriel Pod.png"
                 ],
-                collageUrl: "SP26 BeBo Buddies Gabriel Pod.jpg",
+                collageUrl: "SP26 BeBo Buddies Gabriel Pod.png",
                 goal: "Promote cross-cohort connection and showcase how first-year students benefit from second-year peer mentorship.",
                 approach: "Created a warm, illustrated polaroid-style layout featuring real quote excerpts and outings across St. Louis.",
                 caption: "Being a first-year is easier with friends! 🐻💙 'In BeBo Buddies, students are paired with like-minded peers who also have different interests.' Gabriel and his buddies exploring South Grand, thrift stores, and casual chats between classes. 'BeBo Buddies makes a big campus feel like home.' 🌿",
@@ -392,8 +386,7 @@
                 title: "Happy Holidays from Beyond Boundaries!",
                 type: "Festive Video Campaign",
                 isVideo: true,
-                // MAKE SURE THIS MATCHES YOUR EXACT FILENAME AND EXTENSION
-                mediaUrl: "Happy Holidays from Beyond Boundaries!.mp4", 
+                mediaUrl: "🎄 Happy Holidays from Beyond Boundaries!.mp4", 
                 goal: "Express program-wide appreciation for peer mentors, staff, and professors heading into winter break.",
                 approach: "Designed a festive Instagram story video incorporating student photo cutouts and handwritten-style typography tags.",
                 caption: "This holiday season... We're thankful for BeBo peer mentors, BeBo staff, and BeBo profs! ❄️✨ Happy Holidays to our entire BeBo community! ⛄❤️ #BeBoFam #WashUHolidays",
@@ -404,9 +397,9 @@
                 type: "Milestone Reflection Event Banner",
                 isVideo: false,
                 images: [
-                    "46.jpg"
+                    "46.png"
                 ],
-                collageUrl: "46.jpg",
+                collageUrl: "46.png",
                 goal: "Commemorate sophomore cohort progress and celebrate being halfway through the program.",
                 approach: "Mapped a visual timeline from Fall 2024 Orientation to Fall 2024 Welcome Dinner, leading into 'Spring 2026, here we are!'",
                 caption: "BeBo Inaugural Sophomore Celebration! 🎉 Our sophomores spent time reflecting on just how much they've grown since their first year and discussing what they're most excited about moving into the second half of our program. 🚀 @WashUBeyondBoundaries",
@@ -416,7 +409,6 @@
                 title: "Reel -- Spring 2026 Course Endgame of Entrepreneurship",
                 type: "Video Reel Showcase (.mp4)",
                 isVideo: true,
-                // MAKE SURE THIS MATCHES YOUR EXACT FILENAME AND EXTENSION
                 mediaUrl: "Reel -- Spring 2026 Course Endgame of Entrepreneurship.mp4",
                 goal: "Showcase hands-on prototyping and pitch presentations in interdisciplinary courses.",
                 approach: "Filmed and edited fast-paced footage showing design model building, notebook sketches, and team collaboration.",
@@ -427,7 +419,6 @@
                 title: "Architecture Contest Andres '27 Reel",
                 type: "Video Reel (.mp4)",
                 isVideo: true,
-                // MAKE SURE THIS MATCHES YOUR EXACT FILENAME AND EXTENSION
                 mediaUrl: "architecture contest Andres '27 Reel.mp4",
                 goal: "Highlight architectural model design contests and student interdisciplinary achievements.",
                 approach: "Recorded close-up model detail shots, precision lighting, and student presentations.",
@@ -438,7 +429,6 @@
                 title: "Clare Dutton '25 spotlight reel",
                 type: "Student Profile Video (.mp4)",
                 isVideo: true,
-                // MAKE SURE THIS MATCHES YOUR EXACT FILENAME AND EXTENSION
                 mediaUrl: "Clare Dutton '25 spotlight reel.mp4",
                 goal: "Spotlight individual student experiences and senior milestones through short video format.",
                 approach: "Edited concise interview footage and action clips showing student campus involvement.",
@@ -494,7 +484,6 @@
 
                 mediaElement = `
                     <div class="space-y-4">
-                        <!-- Main Image Displayer with reliable fallback -->
                         <div class="relative rounded-2xl overflow-hidden bg-slate-100 h-[420px] flex items-center justify-center shadow-lg border border-pink-100 group">
                             <img id="carouselImg" src="${activeImagesList[0]}" onerror="this.onerror=null; this.src='https://placehold.co/600x800/f1f5f9/475569?text=Image+Preview';" alt="${item.title}" class="w-full h-full object-contain transition duration-300">
                             
@@ -511,7 +500,6 @@
                             ` : ''}
                         </div>
 
-                        <!-- Full View Banner Strip with fallback -->
                         ${item.collageUrl ? `
                             <div class="bg-pink-50/60 border border-pink-200/80 rounded-2xl p-3 text-center">
                                 <div class="flex items-center justify-between mb-1.5 px-1">
@@ -532,7 +520,6 @@
 
             modalBody.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    <!-- Left Column: Strategy & Content Breakdown -->
                     <div class="space-y-4">
                         <div>
                             <span class="text-xs font-extrabold px-3.5 py-1 bg-pink-100 text-pink-700 rounded-full uppercase tracking-wider border border-pink-200">
@@ -562,7 +549,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Media Display / Video Player -->
                     <div class="w-full">
                         ${mediaElement}
                     </div>
