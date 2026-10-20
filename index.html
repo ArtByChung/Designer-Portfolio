@@ -355,28 +355,21 @@
         </div>
 
         <!-- ABOUT ME VIEW (Hidden by default) -->
-        <div id="view-about" class="hidden view-section max-w-4xl mx-auto">
-            <!-- Added relative and overflow-hidden for the stickers -->
-            <div class="bg-white/80 border border-pink-200/80 rounded-3xl p-8 sm:p-12 shadow-xl backdrop-blur-md relative overflow-hidden">
+        <div id="view-about" class="hidden view-section max-w-4xl mx-auto py-10">
+            
+            <!-- Wrapper for relative positioning of stickers -->
+            <div class="relative w-full">
                 
-                <!-- 3D Stickers (Background Decor) -->
-                <div class="absolute inset-0 pointer-events-none z-0 opacity-80">
-                    <!-- Sunflower -->
-                    <div class="absolute top-6 left-8 text-6xl drop-shadow-2xl transform -rotate-12">🌻</div>
-                    <!-- Palette -->
-                    <div class="absolute top-12 right-10 text-7xl drop-shadow-2xl transform rotate-12">🎨</div>
-                    <!-- Books -->
-                    <div class="absolute bottom-16 left-10 text-6xl drop-shadow-2xl transform rotate-6">📚</div>
-                    <!-- Food (Ramen) -->
-                    <div class="absolute bottom-8 right-12 text-7xl drop-shadow-2xl transform -rotate-12">🍜</div>
-                    <!-- Airplane -->
-                    <div class="absolute top-1/2 right-4 text-5xl drop-shadow-2xl transform -rotate-45 opacity-60">✈️</div>
-                    <!-- Grad Cap -->
-                    <div class="absolute top-1/3 left-4 text-5xl drop-shadow-2xl transform rotate-12 opacity-60">🎓</div>
-                </div>
+                <!-- 3D Stickers (Positioned outside the card) -->
+                <div class="absolute -top-12 -left-8 text-7xl drop-shadow-2xl transform -rotate-12 z-0 opacity-90 pointer-events-none">🌻</div>
+                <div class="absolute -top-10 -right-10 text-8xl drop-shadow-2xl transform rotate-12 z-0 opacity-90 pointer-events-none">🎨</div>
+                <div class="absolute -bottom-16 -left-12 text-7xl drop-shadow-2xl transform rotate-6 z-0 opacity-90 pointer-events-none">📚</div>
+                <div class="absolute -bottom-12 -right-8 text-8xl drop-shadow-2xl transform -rotate-12 z-0 opacity-90 pointer-events-none">🍜</div>
+                <div class="absolute top-1/3 -right-16 text-6xl drop-shadow-2xl transform -rotate-45 z-0 opacity-80 pointer-events-none">✈️</div>
+                <div class="absolute top-2/3 -left-16 text-6xl drop-shadow-2xl transform rotate-12 z-0 opacity-80 pointer-events-none">🎓</div>
 
-                <!-- Content (z-10 to stay above stickers) -->
-                <div class="relative z-10">
+                <!-- Main Card -->
+                <div class="bg-white/95 border border-pink-200/80 rounded-3xl p-8 sm:p-12 shadow-2xl relative z-10">
                     <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8 text-slate-900 flex items-center gap-3">
                         <span class="w-4 h-4 rounded-full bg-pink-500"></span> About Me
                     </h2>
@@ -426,22 +419,22 @@
         </div>
     </div>
 
-    <!-- PANORAMIC ZOOM MODAL (Fixed layout) -->
+    <!-- PANORAMIC ZOOM MODAL (Dynamic Height Scaling) -->
     <div id="panoramaZoomModal" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300">
         <div class="absolute top-4 right-4 flex gap-4 z-50">
-            <button onclick="zoomPanorama(-0.25)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">-</button>
-            <button onclick="zoomPanorama(0.25)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">+</button>
+            <button onclick="zoomPanorama(-10)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">-</button>
+            <button onclick="zoomPanorama(10)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">+</button>
             <button onclick="closePanoramaZoom()" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl transition shadow-lg">✕</button>
         </div>
         
         <!-- Container that allows scrolling in all directions -->
-        <div class="w-full h-full overflow-auto flex items-start justify-start p-12 no-scrollbar" id="panoramaZoomContainer">
-            <!-- Inner wrapper that gets scaled -->
-            <div class="flex flex-nowrap w-max h-max origin-top-left transition-transform duration-200" id="panoramaZoomContent" style="transform: scale(1);">
+        <div class="w-full h-full overflow-auto flex p-12 no-scrollbar" id="panoramaZoomContainer">
+            <!-- Inner wrapper where height is adjusted dynamically -->
+            <div class="flex flex-nowrap m-auto" id="panoramaZoomContent">
                 <!-- Images injected here -->
             </div>
         </div>
-        <p class="text-white/80 text-sm mt-3 font-medium absolute bottom-6 bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-sm pointer-events-none">Scroll horizontally & vertically to explore. Use +/- to zoom.</p>
+        <p class="text-white/80 text-sm mt-3 font-medium absolute bottom-6 bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-sm pointer-events-none">Use +/- to zoom. Scroll to pan.</p>
     </div>
 
     <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-pink-200/60 text-center text-xs text-slate-500 font-medium">
@@ -572,7 +565,6 @@
 
         let currentImageIndex = 0;
         let activeImagesList = [];
-        let panoramaZoomScale = 1;
 
         function scrollGallery(gridId, distance) {
             const container = document.getElementById(gridId);
@@ -720,24 +712,40 @@
             setTimeout(() => zoomModal.classList.add('hidden'), 300);
         }
 
-        // --- PANORAMIC ZOOM (FIXED) ---
+        // --- PANORAMIC ZOOM (Dynamic Height Scaling for perfect fit) ---
         function openPanoramaZoom() {
             const container = document.getElementById('panoramaZoomContent');
-            // Added a fixed height that's large enough to show detail but small enough to fit the screen initially
+            // Load images at a default height of 50vh
             container.innerHTML = activeImagesList.map(imgSrc => `
-                <img src="${imgSrc}" class="h-[70vh] w-auto object-contain block" alt="Panorama">
+                <img src="${imgSrc}" class="h-[50vh] w-auto object-contain block" alt="Panorama">
             `).join('');
             
-            panoramaZoomScale = 1;
-            container.style.transform = `scale(${panoramaZoomScale})`;
-            
             const modal = document.getElementById('panoramaZoomModal');
+            const wrapper = document.getElementById('panoramaZoomContainer');
+            
             modal.classList.remove('hidden');
             setTimeout(() => modal.classList.remove('opacity-0'), 10);
-            
-            // Reset scroll position to top left
-            document.getElementById('panoramaZoomContainer').scrollTop = 0;
-            document.getElementById('panoramaZoomContainer').scrollLeft = 0;
+
+            // Wait for images to load to calculate the exact width, then scale down to fit if needed
+            setTimeout(() => {
+                const img = container.querySelector('img');
+                if (!img) return;
+
+                const currentWidth = container.scrollWidth;
+                const wrapperWidth = wrapper.clientWidth;
+
+                // If it's wider than the screen, scale down the height so the whole width fits
+                if (currentWidth > wrapperWidth) {
+                    const newHeight = 50 * (wrapperWidth / currentWidth) * 0.9; // 90% to leave padding
+                    const images = document.querySelectorAll('#panoramaZoomContent img');
+                    images.forEach(i => {
+                        i.style.height = `${newHeight}vh`;
+                    });
+                }
+                
+                wrapper.scrollTop = 0;
+                wrapper.scrollLeft = 0;
+            }, 150);
         }
 
         function closePanoramaZoom() {
@@ -747,11 +755,20 @@
         }
 
         function zoomPanorama(amount) {
-            panoramaZoomScale += amount;
-            if (panoramaZoomScale < 0.5) panoramaZoomScale = 0.5;
-            if (panoramaZoomScale > 3) panoramaZoomScale = 3;
-            // Using transform scale with origin top-left allows the scrollbars to expand correctly
-            document.getElementById('panoramaZoomContent').style.transform = `scale(${panoramaZoomScale})`;
+            const images = document.querySelectorAll('#panoramaZoomContent img');
+            if (images.length === 0) return;
+
+            // Get current height in vh
+            let currentHeight = parseFloat(images[0].style.height);
+            if (isNaN(currentHeight)) currentHeight = 50;
+
+            let newHeight = currentHeight + amount;
+            if (newHeight < 10) newHeight = 10;
+            if (newHeight > 200) newHeight = 200;
+
+            images.forEach(img => {
+                img.style.height = `${newHeight}vh`;
+            });
         }
 
         function closeModal() {
