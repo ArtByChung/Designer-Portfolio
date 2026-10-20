@@ -119,7 +119,7 @@
     <div class="ambient-bg-1"></div>
     <div class="ambient-bg-2"></div>
 
-    <!-- COMPLETELY STATIC & TRANSPARENT HEADER (No sticky, no fixed) -->
+    <!-- COMPLETELY STATIC HEADER (No sticky, no fixed) -->
     <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
         <div class="flex items-center space-x-4 mb-4 sm:mb-0">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center font-extrabold text-2xl text-white shadow-lg shadow-pink-500/30">
@@ -356,25 +356,46 @@
 
         <!-- ABOUT ME VIEW (Hidden by default) -->
         <div id="view-about" class="hidden view-section max-w-4xl mx-auto">
-            <div class="bg-white/80 border border-pink-200/80 rounded-3xl p-8 sm:p-12 shadow-xl backdrop-blur-md">
-                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8 text-slate-900 flex items-center gap-3">
-                    <span class="w-4 h-4 rounded-full bg-pink-500"></span> About Me
-                </h2>
-                <div class="prose prose-lg text-slate-700 leading-relaxed space-y-6 font-medium">
-                    <p class="text-2xl text-slate-800 font-semibold">
-                        Hey there! I’m Catherine. 🌻
-                    </p>
-                    <p>
-                        I’m a Houston native and a recent grad from Washington University in St. Louis (Class of 2026) with a BA in Arts. I’m naturally curious and always chasing the next adventure—whether that's wandering through a new city, studying a fascinating subject, or getting lost in a good book. 
-                    </p>
-                    <p>
-                        I’m a huge foodie and I absolutely love exploring different cultures through their cuisines! Learning about the world through food and shared experiences is one of my favorite things.
-                    </p>
-                    <p>
-                        At my core, I’m an artist, designer, and writer. I pour my heart into creating designs and art that build community and give people a way to express their emotions. For me, creativity is all about making people feel seen and understood.
-                    </p>
-                    <div class="mt-8 p-6 bg-pink-50 rounded-2xl border border-pink-100 italic text-pink-700 text-center text-lg">
-                        "I can't wait to connect and collaborate with others who challenge and inspire me. Let's create something beautiful together!"
+            <!-- Added relative and overflow-hidden for the stickers -->
+            <div class="bg-white/80 border border-pink-200/80 rounded-3xl p-8 sm:p-12 shadow-xl backdrop-blur-md relative overflow-hidden">
+                
+                <!-- 3D Stickers (Background Decor) -->
+                <div class="absolute inset-0 pointer-events-none z-0 opacity-80">
+                    <!-- Sunflower -->
+                    <div class="absolute top-6 left-8 text-6xl drop-shadow-2xl transform -rotate-12">🌻</div>
+                    <!-- Palette -->
+                    <div class="absolute top-12 right-10 text-7xl drop-shadow-2xl transform rotate-12">🎨</div>
+                    <!-- Books -->
+                    <div class="absolute bottom-16 left-10 text-6xl drop-shadow-2xl transform rotate-6">📚</div>
+                    <!-- Food (Ramen) -->
+                    <div class="absolute bottom-8 right-12 text-7xl drop-shadow-2xl transform -rotate-12">🍜</div>
+                    <!-- Airplane -->
+                    <div class="absolute top-1/2 right-4 text-5xl drop-shadow-2xl transform -rotate-45 opacity-60">✈️</div>
+                    <!-- Grad Cap -->
+                    <div class="absolute top-1/3 left-4 text-5xl drop-shadow-2xl transform rotate-12 opacity-60">🎓</div>
+                </div>
+
+                <!-- Content (z-10 to stay above stickers) -->
+                <div class="relative z-10">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8 text-slate-900 flex items-center gap-3">
+                        <span class="w-4 h-4 rounded-full bg-pink-500"></span> About Me
+                    </h2>
+                    <div class="prose prose-lg text-slate-700 leading-relaxed space-y-6 font-medium">
+                        <p class="text-2xl text-slate-800 font-semibold">
+                            Hey there! I’m Catherine. 🌻
+                        </p>
+                        <p>
+                            I’m a Houston native and a recent grad from Washington University in St. Louis (Class of 2026) with a BA in Arts. I’m naturally curious and always chasing the next adventure—whether that's wandering through a new city, studying a fascinating subject, or getting lost in a good book. 
+                        </p>
+                        <p>
+                            I’m a huge foodie and I absolutely love exploring different cultures through their cuisines! Learning about the world through food and shared experiences is one of my favorite things.
+                        </p>
+                        <p>
+                            At my core, I’m an artist, designer, and writer. I pour my heart into creating designs and art that build community and give people a way to express their emotions. For me, creativity is all about making people feel seen and understood.
+                        </p>
+                        <div class="mt-8 p-6 bg-pink-50 rounded-2xl border border-pink-100 italic text-pink-700 text-center text-lg relative z-10 shadow-sm">
+                            "I can't wait to connect and collaborate with others who challenge and inspire me. Let's create something beautiful together!"
+                        </div>
                     </div>
                 </div>
             </div>
@@ -405,20 +426,22 @@
         </div>
     </div>
 
-    <!-- PANORAMIC ZOOM MODAL -->
-    <div id="panoramaZoomModal" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300 p-4">
+    <!-- PANORAMIC ZOOM MODAL (Fixed layout) -->
+    <div id="panoramaZoomModal" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300">
         <div class="absolute top-4 right-4 flex gap-4 z-50">
             <button onclick="zoomPanorama(-0.25)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">-</button>
             <button onclick="zoomPanorama(0.25)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">+</button>
             <button onclick="closePanoramaZoom()" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl transition shadow-lg">✕</button>
         </div>
         
-        <div class="w-full h-full overflow-auto flex items-center p-12 no-scrollbar" id="panoramaZoomContainer">
-            <div class="flex transition-transform duration-200 origin-left" id="panoramaZoomContent" style="transform: scale(1);">
+        <!-- Container that allows scrolling in all directions -->
+        <div class="w-full h-full overflow-auto flex items-start justify-start p-12 no-scrollbar" id="panoramaZoomContainer">
+            <!-- Inner wrapper that gets scaled -->
+            <div class="flex flex-nowrap w-max h-max origin-top-left transition-transform duration-200" id="panoramaZoomContent" style="transform: scale(1);">
                 <!-- Images injected here -->
             </div>
         </div>
-        <p class="text-white/80 text-sm mt-3 font-medium absolute bottom-6 bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-sm pointer-events-none">Scroll horizontally to explore. Use +/- to zoom.</p>
+        <p class="text-white/80 text-sm mt-3 font-medium absolute bottom-6 bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-sm pointer-events-none">Scroll horizontally & vertically to explore. Use +/- to zoom.</p>
     </div>
 
     <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-pink-200/60 text-center text-xs text-slate-500 font-medium">
@@ -697,9 +720,10 @@
             setTimeout(() => zoomModal.classList.add('hidden'), 300);
         }
 
-        // --- PANORAMIC ZOOM (NEW) ---
+        // --- PANORAMIC ZOOM (FIXED) ---
         function openPanoramaZoom() {
             const container = document.getElementById('panoramaZoomContent');
+            // Added a fixed height that's large enough to show detail but small enough to fit the screen initially
             container.innerHTML = activeImagesList.map(imgSrc => `
                 <img src="${imgSrc}" class="h-[70vh] w-auto object-contain block" alt="Panorama">
             `).join('');
@@ -711,7 +735,8 @@
             modal.classList.remove('hidden');
             setTimeout(() => modal.classList.remove('opacity-0'), 10);
             
-            // Reset scroll position
+            // Reset scroll position to top left
+            document.getElementById('panoramaZoomContainer').scrollTop = 0;
             document.getElementById('panoramaZoomContainer').scrollLeft = 0;
         }
 
@@ -725,6 +750,7 @@
             panoramaZoomScale += amount;
             if (panoramaZoomScale < 0.5) panoramaZoomScale = 0.5;
             if (panoramaZoomScale > 3) panoramaZoomScale = 3;
+            // Using transform scale with origin top-left allows the scrollbars to expand correctly
             document.getElementById('panoramaZoomContent').style.transform = `scale(${panoramaZoomScale})`;
         }
 
