@@ -157,9 +157,9 @@
         <!-- PORTFOLIO VIEW -->
         <div id="view-portfolio" class="view-section space-y-16">
             
-            <!-- Left-Aligned Header Section -->
+            <!-- Solid Purple Header Section -->
             <div class="w-full mb-8 text-left">
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 bg-clip-text text-transparent inline-block pb-2">
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-purple-700 inline-block pb-2">
                     Good design solves business problems.
                 </h2>
                 <p class="text-slate-800 text-base sm:text-lg leading-relaxed font-medium">
@@ -522,18 +522,21 @@
                     "featured_strategy_3.png",
                     "featured_strategy_4.png"  
                 ],
-                goal: "Before designing a single post, I mapped out a unified social media and web strategy to build brand trust and scale our audience. The core goal was to clearly communicate the program's mission: breaking down academic silos and facilitating cross-functional collaboration.\n\nStarting Point:\nWhen I took over the department's marketing, Instagram sat at 450 followers. Over two years, I doubled that community to 870 followers.\n\nThe Big Wins:\nI started with a full digital audit to identify where we could improve. From there, I rebuilt our brand identity to clearly communicate our value proposition: teaching students to solve complex problems through cross-functional collaboration. I positioned the program to stand out to 8,000 undergrads while feeling cohesive within WashU’s Top 20 ecosystem, and built scalable caption templates to keep our messaging consistent.\n\nThe data backed this approach. I noticed video was our highest performer, averaging 900 views. For a young program with 350 alumni, that level of engagement felt huge, so I made video a core pillar of the strategy.",
+                goal: "Before designing a single post, I mapped out a unified social media and web strategy to build brand trust and scale our audience. The core goal was to clearly communicate the program's mission: breaking down academic silos and facilitating cross-functional collaboration.\n\nStarting Point:\nWhen I took over the department's marketing, Instagram sat at 450 followers. Over two years, I doubled that community to 870 followers.\n\nThe Big Wins:\nI started with a full digital audit to identify where we could improve. From there, I rebuilt our brand identity to clearly communicate our value proposition: teaching students to solve complex problems through cross-functional collaboration. I positioned the program to stand out to 8,000 undergrads while feeling cohesive within WashU’s Top 20 ecosystem, and built scalable caption templates to keep our messaging consistent.",
                 approach: "",
                 caption: "",
                 metric: "",
                 extraHtml: `
-                    <div class="mt-6">
+                    <div class="my-6">
                         <p class="text-slate-900 font-extrabold mb-3 text-lg">Bio Update (Old vs New):</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[15px]">
                             <div class="bg-slate-100 p-4 rounded-xl border border-slate-200 text-slate-800"><span class="font-bold text-slate-900">Old Bio:</span> "In Beyond Boundaries, students make up an ecosystem of interdisciplinary scholars intent on problem-solving through cross-discipline collaboration."</div>
                             <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200 text-slate-800"><span class="font-bold text-slate-900">New Bio:</span> "Interdisciplinary education meets real-world impact. Preparing future leaders with seminars, events, & professional pathways. #ThinkBeyondBoundaries"</div>
                         </div>
                     </div>
+                    <p class="text-slate-900 text-base leading-relaxed break-words mt-6">
+                        The data backed this approach. I noticed video was our highest performer, averaging 900 views. For a young program with 350 alumni, that level of engagement felt huge, so I made video a core pillar of the strategy.
+                    </p>
                 `
             },
             jack: {
@@ -646,14 +649,14 @@
             if (!text) return '';
             let formatted = text
                 .replace(/\n/g, '<br>')
-                .replace(/(🎯 [^<]+?:)/g, '<strong class="block text-blue-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
-                .replace(/(🎨 [^<]+?:)/g, '<strong class="block text-purple-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
-                .replace(/(✍️ [^<]+?:)/g, '<strong class="block text-orange-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
-                .replace(/(📈 [^<]+?:)/g, '<strong class="block text-emerald-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
-                .replace(/(Starting Point:)/g, '<strong class="block text-indigo-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
-                .replace(/(The Big Wins:)/g, '<strong class="block text-indigo-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>');
+                .replace(/(🎯 [^<]+?:)/g, '<strong class="block text-blue-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
+                .replace(/(🎨 [^<]+?:)/g, '<strong class="block text-purple-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
+                .replace(/(✍️ [^<]+?:)/g, '<strong class="block text-orange-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
+                .replace(/(📈 [^<]+?:)/g, '<strong class="block text-emerald-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
+                .replace(/(Starting Point:)/g, '<strong class="block text-indigo-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
+                .replace(/(The Big Wins:)/g, '<strong class="block text-indigo-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>');
             
-            // Remove extra line breaks before block elements
+            // Remove extra line breaks before block elements to prevent massive empty spaces
             formatted = formatted.replace(/(<br>)+(<strong)/g, '$2');
             
             return `<div class="text-slate-900 text-base leading-relaxed break-words">${formatted}</div>`;
@@ -683,8 +686,9 @@
                 const hasMultiple = activeImagesList.length > 1;
                 const showPanorama = hasMultiple && key !== 'featuredStrategy';
 
+                // FIXED PANORAMA STRIP: Uses object-contain to show the full images instead of slicing them
                 const panoramicStrip = activeImagesList.map(imgSrc => `
-                    <img src="${imgSrc}" onclick="event.stopPropagation(); openZoomModal('${imgSrc}')" class="h-48 w-auto object-cover block cursor-zoom-in" alt="Panorama Slice">
+                    <img src="${imgSrc}" onclick="event.stopPropagation(); openZoomModal('${imgSrc}')" class="h-48 w-auto object-contain block cursor-zoom-in" alt="Panorama Slice">
                 `).join('');
 
                 mediaElement = `
@@ -712,7 +716,7 @@
                                 <span class="text-[10px] text-slate-500 font-medium cursor-pointer hover:text-pink-600 transition" onclick="openPanoramaZoom()">Click to expand & zoom 🔍</span>
                             </div>
                             <div onclick="openPanoramaZoom()" class="overflow-x-auto w-full pb-2 panorama-scroll rounded-lg cursor-pointer group">
-                                <div class="flex" style="width: max-content;">
+                                <div class="flex gap-2" style="width: max-content;">
                                     ${panoramicStrip}
                                 </div>
                             </div>
@@ -742,7 +746,7 @@
                             <div class="mt-4">
                                 ${formatText(item.goal)}
                             </div>
-                            <!-- Extra HTML (Bio Boxes) appears here, exactly after the text paragraphs -->
+                            <!-- Bio Update is now correctly sandwiched here -->
                             ${item.extraHtml || ''}
                         </div>
                     </div>
