@@ -156,12 +156,14 @@
 
         <!-- PORTFOLIO VIEW -->
         <div id="view-portfolio" class="view-section space-y-16">
-            <div class="text-center max-w-3xl mx-auto mb-4">
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 leading-tight">
-                    Creative Work & <span class="inline-block text-slate-900 pb-1">Campaign Portfolio</span>
+            
+            <!-- Updated Header -->
+            <div class="max-w-3xl mx-auto mb-4 text-left">
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 text-slate-900 leading-tight">
+                    Good design solves business problems.
                 </h2>
                 <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
-                    A collection of creative campaigns, multi-media assets, short-form video reels, and audience engagement strategies. Explore work samples detailing campaign goals, strategic thinking, caption copy, and measurable impact.
+                    I spent two years pioneering the digital strategy for an academic program at a <strong class="font-bold">Top 20 university.</strong> Here's how I combined design thinking with business strategy to help the program stand out to 8,000 undergrads and double its digital audience.
                 </p>
             </div>
 
@@ -293,7 +295,7 @@
                     <!-- 6. Holiday Video -->
                     <div onclick="openModal('holidayBebo')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                         <div class="relative h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
-                            <img src="static_holiday_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0e7ff/3730a3?text=▶+Happy+Holidays';" alt="Happy Holidays Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <img src="thumbnail_holidayvideo.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0e7ff/3730a3?text=▶+Happy+Holidays';" alt="Happy Holidays Video" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <div class="w-16 h-16 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center shadow-xl group-hover:scale-110 transition">
@@ -437,12 +439,21 @@
         </div>
     </div>
 
-    <!-- ZOOM MODAL (Individual Slices) -->
+    <!-- ZOOM MODAL (Individual Slices with Navigation) -->
     <div id="zoomModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300 p-4">
         <div class="relative max-w-6xl w-full flex flex-col items-center">
-            <button onclick="closeZoomModal()" class="absolute -top-12 right-0 text-white bg-white/20 hover:bg-white/40 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition">
+            <button onclick="closeZoomModal()" class="absolute -top-12 right-0 text-white bg-white/20 hover:bg-white/40 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition z-50">
                 ✕
             </button>
+            
+            <!-- Arrows for Full Screen Navigation -->
+            <button onclick="event.stopPropagation(); nextZoomImage(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition z-50">
+                ‹
+            </button>
+            <button onclick="event.stopPropagation(); nextZoomImage(1)" class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition z-50">
+                ›
+            </button>
+
             <img id="zoomedImage" src="" alt="Zoomed View" class="max-h-[85vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/20">
             <p class="text-white/80 text-xs mt-3 font-medium">🔍 Click anywhere outside to exit full banner view</p>
         </div>
@@ -598,7 +609,7 @@
                 type: "Festive Video Campaign",
                 isVideo: true,
                 mediaUrl: "happy-holidays.mp4", 
-                poster: "static_holiday_1.png",
+                poster: "thumbnail_holidayvideo.png",
                 goal: "🎯 Brief:\nDuring end-of-year downtime, audiences naturally disengage and organic reach slows down. We wanted to keep our talent network connected and the brand top-of-mind. The goal was a campaign that built brand loyalty and primed our audience for re-engagement when operations resumed.",
                 approach: "🎨 Strategy:\nI used a \"group chat\" visual motif to mirror how our audience naturally communicates. By mixing animation, humor, and throwback photos, the design turned a standard greeting into a shared memory.",
                 caption: "Tag someone you miss this winter break 💬 👇🏽", 
@@ -636,10 +647,30 @@
         let currentImageIndex = 0;
         let activeImagesList = [];
         let currentCarouselImg = null;
+        let currentZoomIndex = 0;
+        let zoomImagesList = [];
 
         function scrollGallery(gridId, distance) {
             const container = document.getElementById(gridId);
             container.scrollBy({ left: distance, behavior: 'smooth' });
+        }
+
+        // --- FORMATTING FUNCTION FOR TEXT SECTIONS ---
+        function formatText(text) {
+            if (!text) return '';
+            let formatted = text
+                .replace(/\n/g, '<br>')
+                .replace(/(🎯 [^<]+?:)/g, '<strong class="block text-slate-900 mt-3 mb-1">$1</strong>')
+                .replace(/(🎨 [^<]+?:)/g, '<strong class="block text-slate-900 mt-3 mb-1">$1</strong>')
+                .replace(/(✍️ [^<]+?:)/g, '<strong class="block text-slate-900 mt-3 mb-1">$1</strong>')
+                .replace(/(📈 [^<]+?:)/g, '<strong class="block text-slate-900 mt-3 mb-1">$1</strong>')
+                .replace(/(Starting Point:)/g, '<strong class="block text-slate-900 mt-3 mb-1">$1</strong>')
+                .replace(/(The Big Wins:)/g, '<strong class="block text-slate-900 mt-3 mb-1">$1</strong>');
+            
+            // Remove extra line breaks before block elements
+            formatted = formatted.replace(/(<br>)+(<strong)/g, '$2');
+            
+            return `<div class="text-slate-700 text-sm leading-relaxed break-words">${formatted}</div>`;
         }
 
         function openModal(key) {
@@ -667,7 +698,7 @@
                 const showPanorama = hasMultiple && key !== 'featuredStrategy';
 
                 const panoramicStrip = activeImagesList.map(imgSrc => `
-                    <img src="${imgSrc}" class="h-48 w-auto object-cover block" alt="Panorama Slice">
+                    <img src="${imgSrc}" onclick="event.stopPropagation(); openZoomModal('${imgSrc}')" class="h-48 w-auto object-cover block cursor-zoom-in" alt="Panorama Slice">
                 `).join('');
 
                 mediaElement = `
@@ -723,7 +754,7 @@
                                 <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-1 break-words">${item.title}</h3>
                             </div>
                             <div class="mt-4">
-                                <p class="text-slate-700 text-base leading-relaxed whitespace-pre-line break-words">${item.goal}</p>
+                                ${formatText(item.goal)}
                             </div>
                             ${item.extraHtml || ''}
                         </div>
@@ -750,27 +781,23 @@
                             </div>
 
                             <section class="mt-5 pl-3 border-l-2 border-pink-200 min-w-0">
-                                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
-                                    ${item.goal}
-                                </p>
+                                ${formatText(item.goal)}
                             </section>
 
                             <section class="mt-5 pl-3 border-l-2 border-purple-200 min-w-0">
-                                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
-                                    ${item.approach}
-                                </p>
+                                ${formatText(item.approach)}
                             </section>
 
+                            <!-- Enforcing the Copy Header -->
                             <section class="mt-5 pl-3 border-l-2 border-orange-200 min-w-0">
+                                <h4 class="text-orange-700 font-bold mb-1 text-base">✍️ Copy:</h4>
                                 <p class="text-slate-700 text-sm italic leading-relaxed whitespace-pre-line break-words">
-                                    "${item.caption}"
+                                    "${item.caption.replace(/^✍️ Copy:\n/, '')}"
                                 </p>
                             </section>
 
                             <section class="mt-5 pl-3 border-l-2 border-emerald-200 min-w-0">
-                                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
-                                    ${item.metric}
-                                </p>
+                                ${formatText(item.metric)}
                             </section>
                         </div>
 
@@ -810,11 +837,21 @@
         }
 
         function openZoomModal(url) {
+            zoomImagesList = activeImagesList;
+            currentZoomIndex = zoomImagesList.indexOf(url);
+            if (currentZoomIndex === -1) currentZoomIndex = 0;
+            
             const zoomModal = document.getElementById('zoomModal');
             const zoomedImg = document.getElementById('zoomedImage');
             zoomedImg.src = url;
             zoomModal.classList.remove('hidden');
             setTimeout(() => zoomModal.classList.remove('opacity-0'), 10);
+        }
+
+        function nextZoomImage(direction) {
+            if (!zoomImagesList.length) return;
+            currentZoomIndex = (currentZoomIndex + direction + zoomImagesList.length) % zoomImagesList.length;
+            document.getElementById('zoomedImage').src = zoomImagesList[currentZoomIndex];
         }
 
         function closeZoomModal() {
@@ -826,7 +863,7 @@
         function openPanoramaZoom() {
             const container = document.getElementById('panoramaZoomContent');
             container.innerHTML = activeImagesList.map(imgSrc => `
-                <img src="${imgSrc}" class="h-[50vh] w-auto object-contain block" alt="Panorama">
+                <img src="${imgSrc}" onclick="event.stopPropagation(); openZoomModal('${imgSrc}')" class="h-[50vh] w-auto object-contain block cursor-zoom-in" alt="Panorama">
             `).join('');
             
             const modal = document.getElementById('panoramaZoomModal');
