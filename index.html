@@ -151,9 +151,9 @@
         <!-- PORTFOLIO VIEW -->
         <div id="view-portfolio" class="view-section space-y-16">
             <div class="text-center max-w-3xl mx-auto mb-4">
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-slate-900">
-    Creative Work & <span class="inline-block bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 bg-clip-text text-transparent">Campaign Portfolio</span>
-    </h2>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 leading-snug">
+    Creative Work & <span class="bg-gradient-to-r from-pink-500 via-purple-600 to-orange-500 bg-clip-text text-transparent inline pb-2" style="box-decoration-break: clone; -webkit-box-decoration-break: clone;">Campaign Portfolio</span>
+</h2>
                 <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
                     A collection of creative campaigns, multi-media assets, short-form video reels, and audience engagement strategies. Explore work samples detailing campaign goals, strategic thinking, caption copy, and measurable impact.
                 </p>
@@ -702,48 +702,48 @@
 
             // Float layout ensures text wraps below the image if it exceeds image height
             modalBody.innerHTML = `
-                <div class="w-full">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-
-                        <!-- LEFT: Text cards -->
-                        <div class="min-w-0 space-y-4">
-                            <div>
-                                <span class="inline-block text-xs font-extrabold px-3.5 py-1 bg-pink-100 text-pink-700 rounded-full uppercase tracking-wider border border-pink-200">
-                                    ${item.type}
-                                </span>
-                                <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-1 break-words">
-                                    ${item.title}
-                                </h3>
-                            </div>
-
-                            <div class="min-w-0 break-words bg-pink-50/50 p-4 rounded-2xl border border-pink-100">
-                                <p class="text-pink-700 font-bold mb-1">🎯 The Goal:</p>
-                                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.goal}</p>
-                            </div>
-
-                            <div class="min-w-0 break-words bg-purple-50/50 p-4 rounded-2xl border border-purple-100">
-                                <p class="text-purple-700 font-bold mb-1">🎨 The Approach & Execution:</p>
-                                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.approach}</p>
-                            </div>
-
-                            <div class="min-w-0 break-words bg-orange-50/50 p-4 rounded-2xl border border-orange-100">
-                                <p class="text-orange-700 font-bold mb-1">✍️ Caption Copy:</p>
-                                <p class="text-slate-700 text-sm italic bg-white/90 p-3 rounded-xl border border-orange-200 mt-1 leading-relaxed whitespace-pre-line break-words">"${item.caption}"</p>
-                            </div>
-
-                            <div class="min-w-0 break-words bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
-                                <p class="text-emerald-700 font-bold mb-1">📈 Metric & Impact:</p>
-                                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.metric}</p>
-                                ${item.extraHtml || ''}
-                            </div>
-                        </div>
-
-                        <!-- RIGHT: Image or video -->
-                        <div class="min-w-0 w-full">
-                            ${mediaElement}
-                        </div>
-
+                 <div class="w-full relative">
+                    <!-- Media Container: Floated right on desktop -->
+                    <div class="w-full lg:w-[45%] lg:float-right lg:ml-8 mb-6">
+                        ${mediaElement}
                     </div>
+
+                    <!-- Text Content -->
+                    <div class="w-full min-w-0">
+                        <div class="mb-4">
+                            <span class="inline-block text-xs font-extrabold px-3.5 py-1 bg-pink-100 text-pink-700 rounded-full uppercase tracking-wider border border-pink-200">
+                                ${item.type}
+                            </span>
+                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-1 break-words">${item.title}</h3>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-pink-700 font-bold mb-1">🎯 The Goal:</p>
+                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.goal}</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-purple-700 font-bold mb-1">🎨 The Approach & Execution:</p>
+                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.approach}</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-orange-700 font-bold mb-1">✍️ Caption Copy:</p>
+                            <p class="text-slate-700 text-sm italic leading-relaxed whitespace-pre-line break-words">"${item.caption}"</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-emerald-700 font-bold mb-1">📈 Metric & Impact:</p>
+                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.metric}</p>
+                        </div>
+
+                        <!-- Clear the float here so extraHtml drops below the image -->
+                        <div class="clear-both"></div>
+                        ${item.extraHtml || ''}
+                    </div>
+
+                    <!-- Final clearfix ensures the modal container expands properly around the floated image -->
+                    <div class="clear-both"></div>
                 </div>
             `;
 
