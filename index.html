@@ -104,11 +104,17 @@
         }
 
         .view-section {
-            animation: fadeIn 0.4s ease-in-out;
+            animation: fadeIn 0.15s ease-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .no-scrollbar::-webkit-scrollbar {
@@ -719,28 +725,28 @@
                 </h3>
             </div>
 
-            <section class="mt-4 min-w-0">
+            <section class="mt-5 pl-3 border-l-2 border-pink-200 min-w-0">
                 <h4 class="text-pink-700 font-bold mb-1">🎯 The Goal:</h4>
                 <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
                     ${item.goal}
                 </p>
             </section>
 
-            <section class="mt-4 min-w-0">
+            <section class="mt-5 pl-3 border-l-2 border-purple-200 min-w-0">
                 <h4 class="text-purple-700 font-bold mb-1">🎨 The Approach & Execution:</h4>
                 <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
                     ${item.approach}
                 </p>
             </section>
 
-            <section class="mt-4 min-w-0">
+            <section class="mt-5 pl-3 border-l-2 border-orange-200 min-w-0">
                 <h4 class="text-orange-700 font-bold mb-1">✍️ Caption Copy:</h4>
                 <p class="text-slate-700 text-sm italic leading-relaxed whitespace-pre-line break-words">
                     "${item.caption}"
                 </p>
             </section>
 
-            <section class="mt-4 min-w-0">
+            <section class="mt-5 pl-3 border-l-2 border-emerald-200 min-w-0">
                 <h4 class="text-emerald-700 font-bold mb-1">📈 Metric & Impact:</h4>
                 <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
                     ${item.metric}
