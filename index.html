@@ -468,7 +468,7 @@
         </div>
         
         <div class="w-full h-full overflow-auto flex p-12 no-scrollbar" id="panoramaZoomContainer">
-            <div class="flex flex-nowrap m-auto gap-4" id="panoramaZoomContent">
+            <div class="flex flex-nowrap m-auto" id="panoramaZoomContent">
                 <!-- Images injected here -->
             </div>
         </div>
@@ -648,6 +648,7 @@
         function formatText(text) {
             if (!text) return '';
             let formatted = text
+                .replace(/\n/g, '<br>')
                 .replace(/(🎯 [^<]+?:)/g, '<strong class="block text-blue-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
                 .replace(/(🎨 [^<]+?:)/g, '<strong class="block text-purple-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
                 .replace(/(✍️ [^<]+?:)/g, '<strong class="block text-orange-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
@@ -655,9 +656,9 @@
                 .replace(/(Starting Point:)/g, '<strong class="block text-indigo-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>')
                 .replace(/(The Big Wins:)/g, '<strong class="block text-indigo-600 mt-4 mb-1 text-lg font-extrabold">$1</strong>');
             
-            formatted = formatted.replace(/\n/g, '<br>');
-            // FIX: Remove the <br> immediately after the </strong> to eliminate squiggly empty spaces
-            formatted = formatted.replace(/(<\/strong>)<br>/g, '$1');
+            // FIX FOR WEIRD SPACING: Strip out ALL <br> tags immediately before or after block-level headers
+            formatted = formatted.replace(/(<br>)+(<strong)/g, '$2');
+            formatted = formatted.replace(/(<\/strong>)+(<br>)+/g, '$1');
             
             return `<div class="text-slate-900 text-base leading-relaxed break-words">${formatted}</div>`;
         }
@@ -686,9 +687,9 @@
                 const hasMultiple = activeImagesList.length > 1;
                 const showPanorama = hasMultiple && key !== 'featuredStrategy';
 
-                // FIX: Panoramic strip now shows full images properly scaled, no cropping, larger height
+                // Seamless edge-to-edge panoramic slices
                 const panoramicStrip = activeImagesList.map(imgSrc => `
-                    <img src="${imgSrc}" class="h-64 w-auto object-contain block rounded-lg shadow-sm border border-slate-200" alt="Panorama View">
+                    <img src="${imgSrc}" class="h-48 w-auto object-cover block" alt="Panorama Slice">
                 `).join('');
 
                 mediaElement = `
@@ -716,7 +717,7 @@
                                 <span class="text-[10px] text-slate-500 font-medium cursor-pointer hover:text-pink-600 transition" onclick="openPanoramaZoom()">Click to expand & zoom 🔍</span>
                             </div>
                             <div onclick="openPanoramaZoom()" class="overflow-x-auto w-full pb-2 panorama-scroll rounded-lg cursor-pointer group">
-                                <div class="flex gap-2" style="width: max-content;">
+                                <div class="flex" style="width: max-content;">
                                     ${panoramicStrip}
                                 </div>
                             </div>
@@ -853,9 +854,9 @@
 
         function openPanoramaZoom() {
             const container = document.getElementById('panoramaZoomContent');
-            // Full panoramic view images are larger and not clickable
+            // Reverted to seamless edge-to-edge images for the full-screen modal
             container.innerHTML = activeImagesList.map(imgSrc => `
-                <img src="${imgSrc}" class="h-[60vh] w-auto object-contain block rounded-xl" alt="Panorama">
+                <img src="${imgSrc}" class="h-[50vh] w-auto object-contain block" alt="Panorama">
             `).join('');
             
             const modal = document.getElementById('panoramaZoomModal');
