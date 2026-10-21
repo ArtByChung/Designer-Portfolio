@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catherine Chung | Creative Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Updated to Lexend Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
@@ -16,7 +15,6 @@
             background: none;
         }
 
-        /* Fixed Z-Index for Background Layer */
         body::before {
             content: '';
             position: fixed;
@@ -384,7 +382,6 @@
             
             <div class="relative w-full">
                 
-                <!-- 3D Stickers -->
                 <div class="absolute -top-12 -left-8 text-7xl drop-shadow-2xl transform -rotate-12 z-0 opacity-90 pointer-events-none">🌻</div>
                 <div class="absolute -top-10 -right-10 text-8xl drop-shadow-2xl transform rotate-12 z-0 opacity-90 pointer-events-none">🎨</div>
                 <div class="absolute -bottom-16 -left-12 text-7xl drop-shadow-2xl transform rotate-6 z-0 opacity-90 pointer-events-none">📚</div>
@@ -392,7 +389,6 @@
                 <div class="absolute top-1/3 -right-16 text-6xl drop-shadow-2xl transform -rotate-45 z-0 opacity-80 pointer-events-none">✈️</div>
                 <div class="absolute top-2/3 -left-16 text-6xl drop-shadow-2xl transform rotate-12 z-0 opacity-80 pointer-events-none">🎓</div>
 
-                <!-- Main Card -->
                 <div class="bg-white/95 border border-pink-200/80 rounded-3xl p-8 sm:p-12 shadow-2xl relative z-10">
                     <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-8 text-slate-900 flex items-center gap-3">
                         <span class="w-4 h-4 rounded-full bg-pink-500"></span> About Me
@@ -497,7 +493,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- DATA & CONTENT (Verbatim from PowerPoint) ---
+        // --- DATA & CONTENT ---
         const portfolioData = {
             featuredStrategy: {
                 title: "Strategy and Execution",
@@ -514,12 +510,12 @@
                 extraHtml: `
                     <div class="mt-4 mb-4">
                         <p class="text-slate-700 font-bold mb-2 text-sm">Bio Update (Old vs New):</p>
-                        <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                             <div class="bg-slate-100 p-2 rounded border border-slate-200"><span class="font-bold">Old Bio:</span> "In Beyond Boundaries, students make up an ecosystem of interdisciplinary scholars intent on problem-solving through cross-discipline collaboration."</div>
                             <div class="bg-yellow-50 p-2 rounded border border-yellow-200"><span class="font-bold">New Bio:</span> "Interdisciplinary education meets real-world impact. Preparing future leaders with seminars, events, & professional pathways. #ThinkBeyondBoundaries"</div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 clear-both">
                         <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
                             <div class="text-3xl font-extrabold text-yellow-500">53%</div>
                             <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">of consumers say their social media usage has increased since 2021.</p>
@@ -659,6 +655,8 @@
             } else {
                 activeImagesList = item.images || [];
                 const hasMultiple = activeImagesList.length > 1;
+                // Only show panorama if it's NOT the featured strategy card
+                const showPanorama = hasMultiple && key !== 'featuredStrategy';
 
                 const panoramicStrip = activeImagesList.map(imgSrc => `
                     <img src="${imgSrc}" class="h-48 w-auto object-cover block" alt="Panorama Slice">
@@ -682,7 +680,7 @@
                             ` : ''}
                         </div>
 
-                        ${hasMultiple ? `
+                        ${showPanorama ? `
                         <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3">
                             <div class="flex items-center justify-between mb-2 px-1">
                                 <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700">Panoramic Full View</span>
@@ -699,8 +697,15 @@
                 `;
             }
 
+            // Float layout ensures text wraps below the image if it exceeds image height
             modalBody.innerHTML = `
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="w-full relative">
+                    <!-- Media Container: Floated right on desktop so text wraps around it -->
+                    <div class="w-full lg:w-[48%] lg:float-right lg:ml-8 mb-6 lg:mb-4">
+                        ${mediaElement}
+                    </div>
+
+                    <!-- Text Content -->
                     <div class="space-y-4">
                         <div>
                             <span class="text-xs font-extrabold px-3.5 py-1 bg-pink-100 text-pink-700 rounded-full uppercase tracking-wider border border-pink-200">
@@ -731,9 +736,8 @@
                         </div>
                     </div>
 
-                    <div class="w-full">
-                        ${mediaElement}
-                    </div>
+                    <!-- Clearfix to ensure the modal container expands properly around the floated image -->
+                    <div class="clear-both"></div>
                 </div>
             `;
 
