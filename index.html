@@ -157,12 +157,12 @@
         <!-- PORTFOLIO VIEW -->
         <div id="view-portfolio" class="view-section space-y-16">
             
-            <!-- Updated Header Section -->
-            <div class="w-full max-w-5xl mx-auto mb-8 text-left">
+            <!-- Left-Aligned Header Section -->
+            <div class="w-full mb-8 text-left">
                 <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 leading-tight bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 bg-clip-text text-transparent inline-block pb-2">
                     Good design solves business problems.
                 </h2>
-                <p class="text-slate-700 text-base sm:text-lg leading-relaxed font-medium">
+                <p class="text-slate-800 text-base sm:text-lg leading-relaxed font-medium">
                     I spent two years pioneering the digital strategy for an academic program at a <strong class="font-bold text-slate-900">Top 20 university.</strong> Here's how I combined design thinking with business strategy to help the program stand out to 8,000 undergrads and double its digital audience.
                 </p>
             </div>
@@ -527,25 +527,11 @@
                 caption: "",
                 metric: "",
                 extraHtml: `
-                    <div class="mt-4 mb-4">
-                        <p class="text-slate-700 font-bold mb-2 text-sm">Bio Update (Old vs New):</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                            <div class="bg-slate-100 p-2 rounded border border-slate-200"><span class="font-bold">Old Bio:</span> "In Beyond Boundaries, students make up an ecosystem of interdisciplinary scholars intent on problem-solving through cross-discipline collaboration."</div>
-                            <div class="bg-yellow-50 p-2 rounded border border-yellow-200"><span class="font-bold">New Bio:</span> "Interdisciplinary education meets real-world impact. Preparing future leaders with seminars, events, & professional pathways. #ThinkBeyondBoundaries"</div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 clear-both">
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
-                            <div class="text-3xl font-extrabold text-yellow-500">53%</div>
-                            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">of consumers say their social media usage has increased since 2021.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
-                            <div class="text-3xl font-extrabold text-yellow-500">78%</div>
-                            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">say a brand's social media presence affects how they trust a brand.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
-                            <div class="text-3xl font-extrabold text-yellow-500">88%</div>
-                            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">of Gen Z consumers rely on social media to assess brand trust.</p>
+                    <div class="mt-6">
+                        <p class="text-slate-900 font-extrabold mb-3 text-lg">Bio Update (Old vs New):</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[15px]">
+                            <div class="bg-slate-100 p-4 rounded-xl border border-slate-200 text-slate-800"><span class="font-bold text-slate-900">Old Bio:</span> "In Beyond Boundaries, students make up an ecosystem of interdisciplinary scholars intent on problem-solving through cross-discipline collaboration."</div>
+                            <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-200 text-slate-800"><span class="font-bold text-slate-900">New Bio:</span> "Interdisciplinary education meets real-world impact. Preparing future leaders with seminars, events, & professional pathways. #ThinkBeyondBoundaries"</div>
                         </div>
                     </div>
                 `
@@ -660,17 +646,17 @@
             if (!text) return '';
             let formatted = text
                 .replace(/\n/g, '<br>')
-                .replace(/(🎯 [^<]+?:)/g, '<strong class="block text-blue-600 mt-4 mb-2 text-base font-extrabold">$1</strong>')
-                .replace(/(🎨 [^<]+?:)/g, '<strong class="block text-purple-600 mt-4 mb-2 text-base font-extrabold">$1</strong>')
-                .replace(/(✍️ [^<]+?:)/g, '<strong class="block text-orange-600 mt-4 mb-2 text-base font-extrabold">$1</strong>')
-                .replace(/(📈 [^<]+?:)/g, '<strong class="block text-emerald-600 mt-4 mb-2 text-base font-extrabold">$1</strong>')
-                .replace(/(Starting Point:)/g, '<strong class="block text-indigo-600 mt-4 mb-2 text-base font-extrabold">$1</strong>')
-                .replace(/(The Big Wins:)/g, '<strong class="block text-indigo-600 mt-4 mb-2 text-base font-extrabold">$1</strong>');
+                .replace(/(🎯 [^<]+?:)/g, '<strong class="block text-blue-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
+                .replace(/(🎨 [^<]+?:)/g, '<strong class="block text-purple-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
+                .replace(/(✍️ [^<]+?:)/g, '<strong class="block text-orange-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
+                .replace(/(📈 [^<]+?:)/g, '<strong class="block text-emerald-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
+                .replace(/(Starting Point:)/g, '<strong class="block text-indigo-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>')
+                .replace(/(The Big Wins:)/g, '<strong class="block text-indigo-600 mt-4 mb-2 text-lg font-extrabold">$1</strong>');
             
             // Remove extra line breaks before block elements
             formatted = formatted.replace(/(<br>)+(<strong)/g, '$2');
             
-            return `<div class="text-slate-800 text-[15px] leading-relaxed break-words">${formatted}</div>`;
+            return `<div class="text-slate-900 text-base leading-relaxed break-words">${formatted}</div>`;
         }
 
         function openModal(key) {
@@ -756,6 +742,7 @@
                             <div class="mt-4">
                                 ${formatText(item.goal)}
                             </div>
+                            <!-- Extra HTML (Bio Boxes) appears here, exactly after the text paragraphs -->
                             ${item.extraHtml || ''}
                         </div>
                     </div>
@@ -790,8 +777,8 @@
 
                             <!-- Enforcing the Copy Header -->
                             <section class="mt-5 pl-3 border-l-2 border-orange-200 min-w-0">
-                                <h4 class="text-orange-600 font-extrabold mb-2 text-base">✍️ Copy:</h4>
-                                <p class="text-slate-800 text-[15px] italic leading-relaxed whitespace-pre-line break-words">
+                                <h4 class="text-orange-600 font-extrabold mb-2 text-lg">✍️ Copy:</h4>
+                                <p class="text-slate-900 text-base italic leading-relaxed whitespace-pre-line break-words">
                                     "${item.caption.replace(/^✍️ Copy:\n/, '')}"
                                 </p>
                             </section>
