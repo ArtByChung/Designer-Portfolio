@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catherine Chung | Creative Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Updated to Lexend Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Lexend', sans-serif;
             color: #0f172a;
             overflow-x: hidden;
+            position: relative;
+            background: none;
+        }
+
+        /* Fixed Z-Index for Background Layer */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -3;
             background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 35%, #fef3c7 70%, #ffedd5 100%);
             background-attachment: fixed;
         }
@@ -24,7 +35,7 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(236,72,153,0.18) 0%, rgba(217,70,239,0.08) 70%, rgba(255,255,255,0) 100%);
             filter: blur(80px);
-            z-index: -1;
+            z-index: -2;
             pointer-events: none;
         }
 
@@ -82,7 +93,6 @@
             }
         }
 
-        /* Custom scrollbar for panoramic view */
         .panorama-scroll::-webkit-scrollbar {
             height: 6px;
         }
@@ -95,7 +105,6 @@
             border-radius: 9999px;
         }
 
-        /* Smooth fade for page switching */
         .view-section {
             animation: fadeIn 0.4s ease-in-out;
         }
@@ -104,7 +113,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Hide scrollbar for panoramic zoom */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -119,8 +127,7 @@
     <div class="ambient-bg-1"></div>
     <div class="ambient-bg-2"></div>
 
-    <!-- COMPLETELY STATIC HEADER (No sticky, no fixed) -->
-    <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
+    <header class="w-full max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center relative z-10">
         <div class="flex items-center space-x-4 mb-4 sm:mb-0">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-orange-400 flex items-center justify-center font-extrabold text-2xl text-white shadow-lg shadow-pink-500/30">
                 C
@@ -132,9 +139,8 @@
         </div>
     </header>
 
-    <main class="w-full max-w-7xl mx-auto px-6 py-6 flex-grow relative">
+    <main class="w-full max-w-7xl mx-auto px-6 py-6 flex-grow relative z-10">
         
-        <!-- NAVIGATION TABS (Static) -->
         <div class="flex justify-center mb-12 gap-4">
             <button onclick="showView('portfolio')" id="nav-portfolio" class="px-8 py-3 rounded-full font-bold transition bg-pink-500 text-white shadow-lg shadow-pink-500/30">
                 Portfolio
@@ -175,6 +181,25 @@
 
                 <div class="horizontal-gallery w-full" id="beboGrid">
                     
+                    <!-- Card 0: Featured Strategy and Execution -->
+                    <div onclick="openModal('featuredStrategy')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
+                        <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
+                            <img src="featured_strategy_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/e0f2fe/0369a1?text=Strategy+%26+Execution';" alt="Strategy and Execution" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 bg-pink-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                                Strategy & Execution
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-lg text-slate-900 group-hover:text-pink-600 transition">Digital Strategy & Execution</h3>
+                            <p class="text-xs text-slate-600 mt-1 line-clamp-2">Pioneering the digital strategy for an academic program, combining design thinking with business strategy.</p>
+                            <div class="mt-4 flex items-center justify-between text-xs text-pink-600 font-bold">
+                                <span>View Slides & Strategy &rarr;</span>
+                                <span class="text-slate-400">Featured</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Card 1: Senior Spotlight Jack -->
                     <div onclick="openModal('jack')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                         <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
@@ -309,8 +334,8 @@
                         </div>
                     </div>
 
-                    <!-- Card 7: Inaugural Sophomore Celebration -->
-                    <div onclick="openModal('sophomore')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
+                    <!-- Card 7: Seasonal Scrapbook -->
+                    <div onclick="openModal('seasonal')" class="gallery-card group cursor-pointer bg-white/90 border border-pink-100 rounded-3xl overflow-hidden shadow-lg shadow-pink-500/5 flex flex-col justify-between backdrop-blur-sm">
                         <div class="relative h-80 bg-slate-100 overflow-hidden flex items-center justify-center">
                             <img src="static_event_sophomore_1.png" onerror="this.onerror=null; this.src='https://placehold.co/600x800/d1fae5/065f46?text=Sophomore+Celebration';" alt="Inaugural Sophomore Celebration" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
@@ -319,7 +344,7 @@
                             </span>
                         </div>
                         <div class="p-6">
-                            <h3 class="font-bold text-lg text-slate-900 group-hover:text-emerald-600 transition">Inaugural Sophomore Celebration</h3>
+                            <h3 class="font-bold text-lg text-slate-900 group-hover:text-emerald-600 transition">Seasonal Scrapbook Campaign</h3>
                             <p class="text-xs text-slate-600 mt-1 line-clamp-2">Cohort reflection recap tracking student growth from Fall 2024 Orientation to 2 years later.</p>
                             <div class="mt-4 flex items-center justify-between text-xs text-emerald-600 font-bold">
                                 <span>View Full Banner & Details &rarr;</span>
@@ -354,13 +379,12 @@
             </div>
         </div>
 
-        <!-- ABOUT ME VIEW (Hidden by default) -->
+        <!-- ABOUT ME VIEW -->
         <div id="view-about" class="hidden view-section max-w-4xl mx-auto py-10">
             
-            <!-- Wrapper for relative positioning of stickers -->
             <div class="relative w-full">
                 
-                <!-- 3D Stickers (Positioned outside the card) -->
+                <!-- 3D Stickers -->
                 <div class="absolute -top-12 -left-8 text-7xl drop-shadow-2xl transform -rotate-12 z-0 opacity-90 pointer-events-none">🌻</div>
                 <div class="absolute -top-10 -right-10 text-8xl drop-shadow-2xl transform rotate-12 z-0 opacity-90 pointer-events-none">🎨</div>
                 <div class="absolute -bottom-16 -left-12 text-7xl drop-shadow-2xl transform rotate-6 z-0 opacity-90 pointer-events-none">📚</div>
@@ -375,19 +399,22 @@
                     </h2>
                     <div class="prose prose-lg text-slate-700 leading-relaxed space-y-6 font-medium">
                         <p class="text-2xl text-slate-800 font-semibold">
-                            Hey there! I’m Catherine. 🌻
+                            Hi, I'm Catherine. 🌻
                         </p>
                         <p>
-                            I’m a Houston native and a recent grad from Washington University in St. Louis (Class of 2026) with a BA in Arts. I’m naturally curious and always chasing the next adventure—whether that's wandering through a new city, studying a fascinating subject, or getting lost in a good book. 
+                            I'm a designer, writer, and operations-minded thinker. I'm the person who keeps projects moving, keeps stakeholders in the loop, and makes sure every detail is right the first time. 
                         </p>
                         <p>
-                            I’m a huge foodie and I absolutely love exploring different cultures through their cuisines! Learning about the world through food and shared experiences is one of my favorite things.
+                            My background spans operations at a Fortune 500 healthcare company and a summer in investment banking at a global bank. In all my experiences, I take a messy pile of information, figure out what it's actually telling us, and build a better process behind it. I bring that exact same analytical rigor to my design work.
                         </p>
                         <p>
-                            At my core, I’m an artist, designer, and writer. I pour my heart into creating designs and art that build community and give people a way to express their emotions. For me, creativity is all about making people feel seen and understood.
+                            I care deeply about creating visuals that build community and help people express themselves, and I always ground that creativity in strategy and clean execution.
+                        </p>
+                        <p>
+                            Beyond design, I volunteer in Houston and am a huge foodie. Our local food scene represents over 70 different cultures, and I'm on a very serious mission to try them all. Maybe I should track that in a spreadsheet...
                         </p>
                         <div class="mt-8 p-6 bg-pink-50 rounded-2xl border border-pink-100 italic text-pink-700 text-center text-lg relative z-10 shadow-sm">
-                            "I can't wait to connect and collaborate with others who challenge and inspire me. Let's create something beautiful together!"
+                            "Let's make something beautiful together! Send a (digital) pigeon to catherinechung [at] duck [dot] com."
                         </div>
                     </div>
                 </div>
@@ -398,7 +425,7 @@
 
     <!-- MODAL FOR VIEWING ITEMS -->
     <div id="itemModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden opacity-0 transition-opacity duration-300 px-4 py-6">
-        <div class="bg-white border border-pink-200 rounded-3xl max-w-5xl w-full p-6 sm:p-8 relative transform scale-95 transition-transform duration-300 max-h-[92vh] overflow-y-auto shadow-2xl" id="modalContentBox">
+        <div class="bg-white border border-pink-200 rounded-3xl max-w-6xl w-full p-6 sm:p-8 relative transform scale-95 transition-transform duration-300 max-h-[92vh] overflow-y-auto shadow-2xl" id="modalContentBox">
             <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 w-10 h-10 rounded-full flex items-center justify-center font-bold text-base transition z-20">
                 ✕
             </button>
@@ -419,7 +446,7 @@
         </div>
     </div>
 
-    <!-- PANORAMIC ZOOM MODAL (Dynamic Height Scaling) -->
+    <!-- PANORAMIC ZOOM MODAL -->
     <div id="panoramaZoomModal" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-lg hidden opacity-0 transition-opacity duration-300">
         <div class="absolute top-4 right-4 flex gap-4 z-50">
             <button onclick="zoomPanorama(-10)" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">-</button>
@@ -427,9 +454,7 @@
             <button onclick="closePanoramaZoom()" class="text-white bg-white/20 hover:bg-white/40 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl transition shadow-lg">✕</button>
         </div>
         
-        <!-- Container that allows scrolling in all directions -->
         <div class="w-full h-full overflow-auto flex p-12 no-scrollbar" id="panoramaZoomContainer">
-            <!-- Inner wrapper where height is adjusted dynamically -->
             <div class="flex flex-nowrap m-auto" id="panoramaZoomContent">
                 <!-- Images injected here -->
             </div>
@@ -437,7 +462,7 @@
         <p class="text-white/80 text-sm mt-3 font-medium absolute bottom-6 bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-sm pointer-events-none">Use +/- to zoom. Scroll to pan.</p>
     </div>
 
-    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-pink-200/60 text-center text-xs text-slate-500 font-medium">
+    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-pink-200/60 text-center text-xs text-slate-500 font-medium relative z-10">
         <p>© 2026 Catherine Chung. All rights reserved.</p>
     </footer>
 
@@ -472,8 +497,44 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- MODAL LOGIC ---
+        // --- DATA & CONTENT (Verbatim from PowerPoint) ---
         const portfolioData = {
+            featuredStrategy: {
+                title: "Strategy and Execution",
+                type: "Featured Case Study",
+                isVideo: false,
+                images: [
+                    "featured_strategy_1.png",
+                    "featured_strategy_2.png"
+                ],
+                goal: "Good design solves business problems. I spent two years pioneering the digital strategy for an academic program at a Top 20 university. Here's how I combined design thinking with business strategy to help the program stand out to 8,000 undergrads and double its digital audience.",
+                approach: "Before designing a single post, I mapped out a unified social media and web strategy to build brand trust and scale our audience. The core goal was to clearly communicate the program's mission: breaking down academic silos and facilitating cross-functional collaboration. I started with a full digital audit to identify where we could improve. From there, I rebuilt our brand identity to clearly communicate our value proposition: teaching students to solve complex problems through cross-functional collaboration. I positioned the program to stand out to 8,000 undergrads while feeling cohesive within WashU's Top 20 ecosystem, and built scalable caption templates to keep our messaging consistent. The data backed this approach. I noticed video was our highest performer, averaging 900 views. For a young program with 350 alumni, that level of engagement felt huge, so I made video a core pillar of the strategy.",
+                caption: "Caption Bank Example Template for Promoting Applications:\n\n1. Structure:\n1. Engaging Emojii/action Words to start the post\n2. Call to Action to apply (e.g., want to make a difference on something big)\n3. Program Description with peers, mentors, and the University/Encouragement to apply now\n4. Link/Action button\n6. Add Deadline/Date\n\n2. Example:\nWant to make a difference? Apply now for the Bebo Peer Mentoring Program! Connect with fellow Beyond Boundaries students from different cohorts, share experiences, and grow together. This is your chance to collaborate, inspire, and lead! Don't miss out - apply today! Date: [Insert Date] Apply now [Link] WashU/BeyondBoundaries @ThinkBeyondBoundaries #BebMentorship #BebLocalizers #BebCommunity",
+                metric: "When I took over the department's marketing, Instagram sat at 450 followers. Over two years, I doubled that community to 870 followers.",
+                extraHtml: `
+                    <div class="mt-4 mb-4">
+                        <p class="text-slate-700 font-bold mb-2 text-sm">Bio Update (Old vs New):</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-slate-100 p-2 rounded border border-slate-200"><span class="font-bold">Old Bio:</span> "In Beyond Boundaries, students make up an ecosystem of interdisciplinary scholars intent on problem-solving through cross-discipline collaboration."</div>
+                            <div class="bg-yellow-50 p-2 rounded border border-yellow-200"><span class="font-bold">New Bio:</span> "Interdisciplinary education meets real-world impact. Preparing future leaders with seminars, events, & professional pathways. #ThinkBeyondBoundaries"</div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <div class="text-3xl font-extrabold text-yellow-500">53%</div>
+                            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">of consumers say their social media usage has increased since 2021.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <div class="text-3xl font-extrabold text-yellow-500">78%</div>
+                            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">say a brand's social media presence affects how they trust a brand.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <div class="text-3xl font-extrabold text-yellow-500">88%</div>
+                            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-tight">of Gen Z consumers rely on social media to assess brand trust.</p>
+                        </div>
+                    </div>
+                `
+            },
             jack: {
                 title: "SP26 BeBo26 Senior Spotlight Jack",
                 type: "Senior Spotlight Banner Series",
@@ -485,10 +546,10 @@
                     "static_student_jack_4.png",
                     "static_student_jack_5.png"
                 ],
-                goal: "Highlight individual student journeys, celebrate senior achievements, and explain how BeBo enables interdisciplinary focus.",
-                approach: "Structured a full-width story banner combining photo highlights, student quotes, and key milestone callouts.",
-                caption: "Meet Jack! 🎓 His big question: '...How data and strategy can be used to create smarter decision-making in sports organizations [e.g.] player valuation and team building?' Started: Broad interest ➔ Evolved: Analytics & agency focus. Favorite BeBo memory: Presenting and discussing experiences at the BeBo senior reunion! 🐻✨",
-                metric: "Drove engagement among upperclassmen and prospective students exploring interdisciplinary tracks."
+                goal: "Showcasing the full four-year lifecycle of the program was a top priority. We needed a framework that celebrated senior milestones while proving the long-term ROI of the program to prospective leads and alumni.",
+                approach: "I built a modular story banner that mapped the entire student journey from day one to graduation. By pairing a central portrait with a 'Started vs. Evolved' timeline, I created a visual case study. It showed exactly how a student enters with a broad interest and exits four years later as a fully realized, cross-functional problem solver.",
+                caption: "Figuring out your college path is an adventure! [Swipe to see how one BeBo26 senior turned a love for sports ⚾ into a real-world career path with the help of BeBo! 🐻✨]",
+                metric: "This post reached an audience equal to 126% of our total follower base. It also achieved a 1.9% save rate. That high save rate proved that prospective and early-stage students were bookmarking the post as a blueprint. They saw a peer who successfully navigated the full program, and they wanted that exact cross-functional success for themselves."
             },
             buddies: {
                 title: "SP26 BeBo Buddies Gabriel Pod",
@@ -501,24 +562,58 @@
                     "static_student_mentor_4.png",
                     "static_student_mentor_5.png"
                 ],
-                goal: "Promote cross-cohort connection and showcase how first-year students benefit from second-year peer mentorship.",
-                approach: "Created a warm, illustrated polaroid-style layout featuring real quote excerpts and outings across St. Louis.",
-                caption: "Being a first-year is easier with friends! 🐻💙 'In BeBo Buddies, students are paired with like-minded peers who also have different interests.' Gabriel and his buddies exploring South Grand, thrift stores, and casual chats between classes. 'BeBo Buddies makes a big campus feel like home.' 🌿",
-                metric: "Elevated student participation in mentorship pods across active cohort groups."
+                goal: "The BeBo program ensures student retention by pairing incoming students with experienced peers across different academic departments. This initiative creates cross-functional collaboration from day one. We needed a campaign to drive sign-ups and showcase this collaborative culture.",
+                approach: "I designed the layout to feel like a personal memory. This visually communicated the program's ability to build a tight-knit, cross-functional network within a large institution, serving as direct visual proof that collaboration breaks down institutional silos.",
+                caption: "Finding your footing in college is so much easier when you have the right crew in your corner. With BeBo Buddies, peer support is about real connections from day one. What's it all about? Swipe to see how Gabriel helped his first-year group find their people - -",
+                metric: "This campaign drove a 35% increase in program sign-ups. It also generated a 20% jump in shares as students reposted the banners to show off their groups. This peer-to-peer validation directly reduced early drop-off rates and established a collaborative talent pipeline."
+            },
+            entrepreneurship: {
+                title: "Reel -- Spring 2026 Course Endgame of Entrepreneurship",
+                type: "Video Reel Showcase (.mp4)",
+                isVideo: true,
+                mediaUrl: "entrepreneurship-reel.mp4",
+                poster: "Thumbnail Entrepreneurship.png",
+                goal: "Our Entrepreneurship course is a flagship product offering designed to break down silos and foster cross-functional collaboration. We needed to transform this complex, team-taught curriculum into a compelling pitch to drive enrollment and showcase its unique value.",
+                approach: "To maximize our existing design resources, I focused on asset curation. I used recognizable brand elements, like the established character animations, as a visual bridge across the campaign series.",
+                caption: "- A startup pro and a public health entrepreneur teach how to hack capitalism for good.\n- You'll tackle real social issues like racial health inequities and climate inequality and learn to pitch business ideas for change.\n- First-years, WATCH to learn how to enroll in our Spring 2026 Beyond Boundaries course: The Endgame of Entrepreneurship: Leveraging Capitalism for Good.",
+                metric: "Tracking link clicks showed this campaign drove a 25% increase in traffic to the registration page. It also generated a 12% share rate, proving that a clear value proposition combined with familiar brand assets drove strong engagement. The campaign successfully converted passive viewers into active prospects and reinforced the offering's core value of cross-functional collaboration."
+            },
+            clare: {
+                title: "Clare Dutton '25 spotlight reel",
+                type: "Student Profile Video (.mp4)",
+                isVideo: true,
+                mediaUrl: "clare-reel.mp4",
+                poster: "Clare Dutton thumbnail.png",
+                goal: "We needed to validate our innovation budget by proving it delivered tangible returns. To achieve this, I highlighted one case study showing how our financial support empowered a participant to merge biology and business skills into a global project.",
+                approach: "I interviewed the team member to uncover the specific return on our investment, focusing the narrative on her unique cross-functional journey. This approach maximized our initial allocation and turned a single interview into a high-impact marketing tool.",
+                caption: "Wanna learn how interdisciplinary passion can take you from St. Louis to Madagascar? Meet Clare, a recent #WashU25 grad, and DON'T MISS her EPIC Creative Collaboration!",
+                metric: "The narrative held viewer attention with a 78% completion rate and drove a 20% increase in profile visits. This case study successfully demonstrated the program's ROI. It showcased how our funding directly enables cross-functional problem-solving, making it a powerful marketing asset for securing future budgets and pitching the value of the initiative to stakeholders."
             },
             holidayBebo: {
                 title: "Happy Holidays from Beyond Boundaries!",
                 type: "Festive Video Campaign",
                 isVideo: true,
                 mediaUrl: "happy-holidays.mp4", 
-                goal: "Express program-wide appreciation for peer mentors, staff, and professors heading into winter break.",
-                approach: "Designed a festive Instagram story video incorporating student photo cutouts and handwritten-style typography tags.",
-                caption: "This holiday season... We're thankful for BeBo peer mentors, BeBo staff, and BeBo profs! ❄️✨ Happy Holidays to our entire BeBo community! ⛄❤️ #BeBoFam #WashUHolidays",
-                metric: "Strengthened community culture and recorded high sharing across internal student channels."
+                poster: "static_holiday_1.png",
+                goal: "During end-of-year downtime, audiences naturally disengage and organic reach slows down. We wanted to keep our talent network connected and the brand top-of-mind. The goal was a campaign that built brand loyalty and primed our audience for reengagement when operations resumed.",
+                approach: "I used a 'group chat' visual motif to mirror how our audience naturally communicates. By mixing animation, humor, and throwback photos, the design turned a standard greeting into a shared memory.",
+                caption: "Tag someone you miss this winter break 💬", 
+                metric: "This post spiked a 160% reach relative to our total follower base. It also generated a 16% share rate and an 85% average watch time. This strategy prevented audience drop-off and turned a routine holiday greeting into a highly engaging community moment that significantly boosted organic reach and our cross-functional program culture."
             },
-            sophomore: {
-                title: "Inaugural Sophomore Celebration",
-                type: "Milestone Reflection Event Banner",
+            architecture: {
+                title: "Architecture Contest Andres '27 Reel",
+                type: "Video Reel (.mp4)",
+                isVideo: true,
+                mediaUrl: "architecture-reel.mp4",
+                poster: "Architecture thumbnail.png",
+                goal: "The program's main value is teaching talent to solve complex problems across different teams. The challenge was making a multi-disciplinary process feel exciting to prospective students.",
+                approach: "I interviewed the student who had competed in a cross-functional architecture contest. I then built the video using a mix of existing brand animations and event stills. This dynamic approach gave the audience a clear look at the intense design process. It turned a standard event recap into a compelling recruitment story that captured the genuine pressure and payoff of his process.",
+                caption: "Meet Andres, our DEDICATED and PASSIONATE sophomore architecture student! He took on the Laksey Charette, a grueling 48-hour design competition, and shows us what it means to push boundaries. Don't miss his SECRETS on creativity & resilience! Drop a 🔥 to cheer on Andres and share your thoughts below!",
+                metric: "The visually engaging format held viewer attention, achieving an 85% completion rate. It also generated a 15% share rate as students posted the reel to their networks. By showcasing how the student applied cross-functional skills under pressure, the video successfully reinforced the program's core brand identity while driving organic awareness."
+            },
+            seasonal: {
+                title: "Seasonal Scrapbook Campaign",
+                type: "Event Banner & Collage",
                 isVideo: false,
                 images: [
                     "static_event_sophomore_1.png",
@@ -526,45 +621,16 @@
                     "static_event_sophomore_3.png",
                     "static_event_sophomore_4.png"
                 ],
-                goal: "Commemorate sophomore cohort progress and celebrate being halfway through the program.",
-                approach: "Mapped a visual timeline from Fall 2024 Orientation to Fall 2024 Welcome Dinner, leading into 'Spring 2026, here we are!'",
-                caption: "BeBo Inaugural Sophomore Celebration! 🎉 Our sophomores spent time reflecting on just how much they've grown since their first year and discussing what they're most excited about moving into the second half of our program. 🚀 @WashUBeyondBoundaries",
-                metric: "Directly referenced in cohort reflection feedback as a memorable program milestone."
-            },
-            entrepreneurship: {
-                title: "Reel -- Spring 2026 Course Endgame of Entrepreneurship",
-                type: "Video Reel Showcase (.mp4)",
-                isVideo: true,
-                mediaUrl: "entrepreneurship-reel.mp4",
-                goal: "Showcase hands-on prototyping and pitch presentations in interdisciplinary courses.",
-                approach: "Filmed and edited fast-paced footage showing design model building, notebook sketches, and team collaboration.",
-                caption: "Inside the Endgame of Entrepreneurship course! 💡 Watch how our BeBo students bring bold ideas to life—from early design models to final pitches. Innovation in action at WashU. 📐✨ #Entrepreneurship #WashUDesign",
-                metric: "Primary visual piece used in recruitment materials for prospective applicants."
-            },
-            architecture: {
-                title: "Architecture Contest Andres '27 Reel",
-                type: "Video Reel (.mp4)",
-                isVideo: true,
-                mediaUrl: "architecture-reel.mp4",
-                goal: "Highlight architectural model design contests and student interdisciplinary achievements.",
-                approach: "Recorded close-up model detail shots, precision lighting, and student presentations.",
-                caption: "1 Model. Architectural design highlights featuring Andres '27! 🏛️ Capturing physical scale models and interdisciplinary creativity. #WashUArchitecture #DesignContest",
-                metric: "Featured across student organization networks and personal portfolio highlights."
-            },
-            clare: {
-                title: "Clare Dutton '25 spotlight reel",
-                type: "Student Profile Video (.mp4)",
-                isVideo: true,
-                mediaUrl: "clare-reel.mp4",
-                goal: "Spotlight individual student experiences and senior milestones through short video format.",
-                approach: "Edited concise interview footage and action clips showing student campus involvement.",
-                caption: "Spotlight on Clare Dutton '25! 🌟 Hear how interdisciplinary studies shaped her journey at WashU. 🎓✨ #WashUSpotlight #BeBo25",
-                metric: "Boosted story reach and peer engagement during spotlight week."
+                goal: "The program relies on in-person events to drive cross-departmental networking. We needed a seasonal campaign to highlight a recent student gathering while maintaining brand consistency.",
+                approach: "I designed a layered, scrapbook-style template using cutout photos of the students. Combining these dynamic visuals with classic holiday motifs created a highly adaptable modular system.",
+                caption: "Wishing a merry, joyful, and warm holiday season to our Beyond Boundaries community!",
+                metric: "This post drove a 14% engagement rate and a 16% share rate as attendees reposted it to their own stories. My work proved that strong brand consistency turns event participants into active brand advocates, extending our organic reach and reinforcing the program's core networking value."
             }
         };
 
         let currentImageIndex = 0;
         let activeImagesList = [];
+        let currentCarouselImg = null;
 
         function scrollGallery(gridId, distance) {
             const container = document.getElementById(gridId);
@@ -583,7 +649,7 @@
                 mediaElement = `
                     <div class="space-y-3">
                         <div class="rounded-2xl overflow-hidden bg-slate-900 h-[440px] flex items-center justify-center shadow-lg border border-pink-100">
-                            <video controls autoplay class="w-full h-full object-contain">
+                            <video controls poster="${item.poster || ''}" class="w-full h-full object-contain">
                                 <source src="${item.mediaUrl}" type="video/mp4">
                                 Your browser does not support HTML video.
                             </video>
@@ -594,16 +660,14 @@
                 activeImagesList = item.images || [];
                 const hasMultiple = activeImagesList.length > 1;
 
-                // Generates the seamless panoramic view (stitched horizontally)
                 const panoramicStrip = activeImagesList.map(imgSrc => `
                     <img src="${imgSrc}" class="h-48 w-auto object-cover block" alt="Panorama Slice">
                 `).join('');
 
                 mediaElement = `
                     <div class="space-y-6">
-                        <!-- Main Image Displayer (Clickable to Zoom) -->
                         <div class="relative rounded-2xl overflow-hidden bg-slate-100 h-[420px] flex items-center justify-center shadow-lg border border-pink-100 group">
-                            <img id="carouselImg" src="${activeImagesList[0]}" onclick="openZoomModal('${activeImagesList[0]}')" onerror="this.onerror=null; this.src='https://placehold.co/600x800/f1f5f9/475569?text=Image+Preview';" alt="${item.title}" class="w-full h-full object-contain transition duration-300 cursor-zoom-in">
+                            <img id="carouselImg" src="${activeImagesList[0]}" onerror="this.onerror=null; this.src='https://placehold.co/600x800/f1f5f9/475569?text=Image+Preview';" alt="${item.title}" class="w-full h-full object-contain transition duration-300 cursor-zoom-in">
                             
                             ${hasMultiple ? `
                                 <button onclick="event.stopPropagation(); nextImage(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-slate-800 w-10 h-10 rounded-full flex items-center justify-center font-bold shadow-md transition z-10">
@@ -618,14 +682,12 @@
                             ` : ''}
                         </div>
 
-                        <!-- Full Length Panoramic View -->
                         ${hasMultiple ? `
                         <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3">
                             <div class="flex items-center justify-between mb-2 px-1">
                                 <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700">Panoramic Full View</span>
                                 <span class="text-[10px] text-slate-500 font-medium cursor-pointer hover:text-pink-600 transition" onclick="openPanoramaZoom()">Click to expand & zoom 🔍</span>
                             </div>
-                            <!-- Clickable strip to open Panorama Zoom Modal -->
                             <div onclick="openPanoramaZoom()" class="overflow-x-auto w-full pb-2 panorama-scroll rounded-lg cursor-pointer group">
                                 <div class="flex" style="width: max-content;">
                                     ${panoramicStrip}
@@ -649,22 +711,23 @@
 
                         <div class="bg-pink-50/50 p-4 rounded-2xl border border-pink-100">
                             <p class="text-pink-700 font-bold mb-1">🎯 The Goal:</p>
-                            <p class="text-slate-700 text-sm leading-relaxed">${item.goal}</p>
+                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line">${item.goal}</p>
                         </div>
 
                         <div class="bg-purple-50/50 p-4 rounded-2xl border border-purple-100">
                             <p class="text-purple-700 font-bold mb-1">🎨 The Approach & Execution:</p>
-                            <p class="text-slate-700 text-sm leading-relaxed">${item.approach}</p>
+                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line">${item.approach}</p>
                         </div>
 
                         <div class="bg-orange-50/50 p-4 rounded-2xl border border-orange-100">
                             <p class="text-orange-700 font-bold mb-1">✍️ Caption Copy:</p>
-                            <p class="text-slate-700 text-sm italic bg-white/90 p-3 rounded-xl border border-orange-200 mt-1 leading-relaxed">"${item.caption}"</p>
+                            <p class="text-slate-700 text-sm italic bg-white/90 p-3 rounded-xl border border-orange-200 mt-1 leading-relaxed whitespace-pre-line">"${item.caption}"</p>
                         </div>
 
                         <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
                             <p class="text-emerald-700 font-bold mb-1">📈 Metric & Impact:</p>
-                            <p class="text-slate-700 text-sm leading-relaxed">${item.metric}</p>
+                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line">${item.metric}</p>
+                            ${item.extraHtml || ''}
                         </div>
                     </div>
 
@@ -673,6 +736,15 @@
                     </div>
                 </div>
             `;
+
+            if (!item.isVideo && activeImagesList.length > 0) {
+                currentCarouselImg = document.getElementById('carouselImg');
+                if (currentCarouselImg) {
+                    currentCarouselImg.addEventListener('click', () => {
+                        openZoomModal(activeImagesList[currentImageIndex]);
+                    });
+                }
+            }
 
             const modal = document.getElementById('itemModal');
             const box = document.getElementById('modalContentBox');
@@ -685,19 +757,14 @@
         }
 
         function nextImage(direction) {
-            if (!activeImagesList.length) return;
+            if (!activeImagesList.length || !currentCarouselImg) return;
             currentImageIndex = (currentImageIndex + direction + activeImagesList.length) % activeImagesList.length;
-            const img = document.getElementById('carouselImg');
-            const counter = document.getElementById('carouselCounter');
+            currentCarouselImg.src = activeImagesList[currentImageIndex];
             
-            if (img) {
-                img.src = activeImagesList[currentImageIndex];
-                img.setAttribute('onclick', `openZoomModal('${activeImagesList[currentImageIndex]}')`);
-            }
+            const counter = document.getElementById('carouselCounter');
             if (counter) counter.innerText = `${currentImageIndex + 1} / ${activeImagesList.length}`;
         }
 
-        // --- SINGLE IMAGE ZOOM ---
         function openZoomModal(url) {
             const zoomModal = document.getElementById('zoomModal');
             const zoomedImg = document.getElementById('zoomedImage');
@@ -712,10 +779,8 @@
             setTimeout(() => zoomModal.classList.add('hidden'), 300);
         }
 
-        // --- PANORAMIC ZOOM (Dynamic Height Scaling for perfect fit) ---
         function openPanoramaZoom() {
             const container = document.getElementById('panoramaZoomContent');
-            // Load images at a default height of 50vh
             container.innerHTML = activeImagesList.map(imgSrc => `
                 <img src="${imgSrc}" class="h-[50vh] w-auto object-contain block" alt="Panorama">
             `).join('');
@@ -726,7 +791,6 @@
             modal.classList.remove('hidden');
             setTimeout(() => modal.classList.remove('opacity-0'), 10);
 
-            // Wait for images to load to calculate the exact width, then scale down to fit if needed
             setTimeout(() => {
                 const img = container.querySelector('img');
                 if (!img) return;
@@ -734,9 +798,8 @@
                 const currentWidth = container.scrollWidth;
                 const wrapperWidth = wrapper.clientWidth;
 
-                // If it's wider than the screen, scale down the height so the whole width fits
                 if (currentWidth > wrapperWidth) {
-                    const newHeight = 50 * (wrapperWidth / currentWidth) * 0.9; // 90% to leave padding
+                    const newHeight = 50 * (wrapperWidth / currentWidth) * 0.9; 
                     const images = document.querySelectorAll('#panoramaZoomContent img');
                     images.forEach(i => {
                         i.style.height = `${newHeight}vh`;
@@ -758,7 +821,6 @@
             const images = document.querySelectorAll('#panoramaZoomContent img');
             if (images.length === 0) return;
 
-            // Get current height in vh
             let currentHeight = parseFloat(images[0].style.height);
             if (isNaN(currentHeight)) currentHeight = 50;
 
@@ -780,6 +842,7 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 document.getElementById('modalBody').innerHTML = '';
+                currentCarouselImg = null;
             }, 300);
         }
 
