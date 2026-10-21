@@ -702,50 +702,57 @@
 
             // Float layout ensures text wraps below the image if it exceeds image height
             modalBody.innerHTML = `
-                 <div class="w-full relative">
-                    <!-- Media Container: Floated right on desktop -->
-                    <div class="w-full lg:w-[45%] lg:float-right lg:ml-8 mb-6">
-                        ${mediaElement}
-                    </div>
+                 <div class="w-full">
+        <!-- Float the media on the right on desktop -->
+        <div class="w-full mb-6 lg:mb-4 lg:w-[42%] lg:float-right lg:ml-6">
+            ${mediaElement}
+        </div>
 
-                    <!-- Text Content -->
-                    <div class="w-full min-w-0">
-                        <div class="mb-4">
-                            <span class="inline-block text-xs font-extrabold px-3.5 py-1 bg-pink-100 text-pink-700 rounded-full uppercase tracking-wider border border-pink-200">
-                                ${item.type}
-                            </span>
-                            <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-1 break-words">${item.title}</h3>
-                        </div>
+        <!-- Plain text can flow around the floated media -->
+        <div class="min-w-0">
+            <div class="mb-4">
+                <span class="inline-block text-xs font-extrabold px-3.5 py-1 bg-pink-100 text-pink-700 rounded-full uppercase tracking-wider border border-pink-200">
+                    ${item.type}
+                </span>
+                <h3 class="text-2xl font-bold text-slate-900 mt-3 mb-1 break-words">
+                    ${item.title}
+                </h3>
+            </div>
 
-                        <div class="mt-4">
-                            <p class="text-pink-700 font-bold mb-1">🎯 The Goal:</p>
-                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.goal}</p>
-                        </div>
+            <section class="mt-4 min-w-0">
+                <h4 class="text-pink-700 font-bold mb-1">🎯 The Goal:</h4>
+                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
+                    ${item.goal}
+                </p>
+            </section>
 
-                        <div class="mt-4">
-                            <p class="text-purple-700 font-bold mb-1">🎨 The Approach & Execution:</p>
-                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.approach}</p>
-                        </div>
+            <section class="mt-4 min-w-0">
+                <h4 class="text-purple-700 font-bold mb-1">🎨 The Approach & Execution:</h4>
+                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
+                    ${item.approach}
+                </p>
+            </section>
 
-                        <div class="mt-4">
-                            <p class="text-orange-700 font-bold mb-1">✍️ Caption Copy:</p>
-                            <p class="text-slate-700 text-sm italic leading-relaxed whitespace-pre-line break-words">"${item.caption}"</p>
-                        </div>
+            <section class="mt-4 min-w-0">
+                <h4 class="text-orange-700 font-bold mb-1">✍️ Caption Copy:</h4>
+                <p class="text-slate-700 text-sm italic leading-relaxed whitespace-pre-line break-words">
+                    "${item.caption}"
+                </p>
+            </section>
 
-                        <div class="mt-4">
-                            <p class="text-emerald-700 font-bold mb-1">📈 Metric & Impact:</p>
-                            <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">${item.metric}</p>
-                        </div>
+            <section class="mt-4 min-w-0">
+                <h4 class="text-emerald-700 font-bold mb-1">📈 Metric & Impact:</h4>
+                <p class="text-slate-700 text-sm leading-relaxed whitespace-pre-line break-words">
+                    ${item.metric}
+                </p>
+            </section>
+        </div>
 
-                        <!-- Clear the float here so extraHtml drops below the image -->
-                        <div class="clear-both"></div>
-                        ${item.extraHtml || ''}
-                    </div>
-
-                    <!-- Final clearfix ensures the modal container expands properly around the floated image -->
-                    <div class="clear-both"></div>
-                </div>
-            `;
+        <!-- Full-width supplementary cards start below the media -->
+        <div class="clear-both"></div>
+        ${item.extraHtml || ''}
+    </div>
+`;
 
             if (!item.isVideo && activeImagesList.length > 0) {
                 currentCarouselImg = document.getElementById('carouselImg');
